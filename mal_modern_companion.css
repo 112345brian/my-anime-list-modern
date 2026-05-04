@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.2.0
+@version        6.2.1
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -12,19 +12,19 @@
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
     :root {
-        --m-bg: #f4f1e8;
-        --m-bg1: #fffdf7;
-        --m-bg2: #ebe6da;
-        --m-bg3: #ddd5c5;
-        --m-bg4: #272622;
-        --m-text: #191917;
-        --m-text2: #5f5a50;
-        --m-text3: #8b8578;
-        --m-accent: #f05245;
-        --m-accent2: #ba332a;
-        --m-accent-bg: rgba(240, 82, 69, .10);
-        --m-border: #cdc4b2;
-        --m-border2: #e0d8c9;
+        --m-bg: #f6f7fb;
+        --m-bg1: #ffffff;
+        --m-bg2: #eef2f8;
+        --m-bg3: #dce5f2;
+        --m-bg4: #0a0a0e;
+        --m-text: #1f2933;
+        --m-text2: #5d6b7a;
+        --m-text3: #8a96a6;
+        --m-accent: #2e51a2;
+        --m-accent2: #1d3f86;
+        --m-accent-bg: rgba(46, 81, 162, .10);
+        --m-border: #c9d4e4;
+        --m-border2: #e1e7f0;
         --m-r: 8px;
         --m-r-sm: 7px;
         --m-font: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -1573,19 +1573,98 @@
     }
 
     /* ═══ NEWS PAGE ═══ */
-    body.news .news-container .title a {
-        color: var(--m-text) !important;
-        font-size: 16px !important;
-        font-weight: 700 !important;
+    body.news,
+    body.news.page-common {
+        background: #f6f7fb !important;
+        color: #1f2933 !important;
     }
 
+    body.news #contentWrapper,
+    body.news #content,
+    body.news .content-left,
+    body.news .content-right {
+        background: #f6f7fb !important;
+    }
+
+    body.news a,
+    body.news .breadcrumb a,
+    body.news .news-unit .information a,
+    body.news .comment {
+        color: #2e51a2 !important;
+    }
+
+    body.news a:hover,
+    body.news .news-unit .information a:hover,
+    body.news .comment:hover {
+        color: #1d3f86 !important;
+    }
+
+    body.news .news-list {
+        background: transparent !important;
+    }
+
+    body.news .news-unit:has(.ad-sas),
+    body.news .news-unit:has([id*="728x90"]),
+    body.news .news-unit:has(iframe[id*="728x90"]),
+    body.news .ad-sas,
+    body.news [id*="728x90"],
+    body.news iframe[id*="728x90"] {
+        display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
+    }
+
+    body.news .news-unit {
+        border-color: #c9d4e4 !important;
+        background: transparent !important;
+    }
+
+    body.news .news-unit .image-link img,
+    body.news .news-unit img {
+        border: 1px solid #c9d4e4 !important;
+        border-radius: 3px !important;
+    }
+
+    body.news .news-unit p.title,
+    body.news .news-container .title {
+        margin-bottom: 8px !important;
+    }
+
+    body.news .news-unit p.title a,
+    body.news .news-container .title a {
+        color: #1f2933 !important;
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        line-height: 1.25 !important;
+    }
+
+    body.news .news-unit p.title a:hover,
+    body.news .news-container .title a:hover {
+        color: #2e51a2 !important;
+    }
+
+    body.news .news-unit .text,
+    body.news .news-unit .text p,
     body.news .news-container .content {
-        color: var(--m-text2) !important;
+        color: #5d6b7a !important;
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+        opacity: 1 !important;
+    }
+
+    body.news .news-unit .information,
+    body.news .news-unit .information p {
+        color: #7a8796 !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
     }
 
     body.news .news-container .news-info-block,
     body.news .news-container .tags {
-        background: var(--m-bg) !important;
+        background: transparent !important;
     }
 
     body.news .news-side-block {
@@ -1596,8 +1675,8 @@
     body.news .featured-side-block .di-b.fs14.fw-b {
         margin: 0 0 10px !important;
         padding: 0 0 8px !important;
-        border-bottom: 2px solid #171715 !important;
-        color: #191917 !important;
+        border-bottom: 2px solid #2e51a2 !important;
+        color: #1f2933 !important;
         font-size: 17px !important;
         font-weight: 800 !important;
         line-height: 1.1 !important;
@@ -1606,7 +1685,7 @@
     }
 
     body.news .news-side-block .header .fl-r {
-        color: #ba332a !important;
+        color: #2e51a2 !important;
         font-size: 11px !important;
         font-weight: 700 !important;
         line-height: 1.2 !important;
@@ -1625,7 +1704,7 @@
         grid-template-columns: 52px minmax(0, 1fr) !important;
         gap: 10px !important;
         padding: 12px 0 !important;
-        border-top: 1px solid #cdc4b2 !important;
+        border-top: 1px solid #c9d4e4 !important;
         background: transparent !important;
     }
 
@@ -1644,7 +1723,7 @@
         height: 52px !important;
         object-fit: cover !important;
         border-radius: 4px !important;
-        border: 1px solid #cdc4b2 !important;
+        border: 1px solid #c9d4e4 !important;
     }
 
     body.news .news-side-block li.news > div {
@@ -1654,20 +1733,20 @@
 
     body.news .news-side-block a.title {
         display: block !important;
-        color: #191917 !important;
+        color: #1f2933 !important;
         font-size: 13px !important;
         font-weight: 800 !important;
         line-height: 1.25 !important;
     }
 
     body.news .news-side-block a.title:hover {
-        color: #ba332a !important;
+        color: #2e51a2 !important;
     }
 
     body.news .news-side-block .information,
     body.news .news-side-block .information a,
     body.news .news-side-block .comment {
-        color: #8b8578 !important;
+        color: #7a8796 !important;
         font-size: 11px !important;
         font-weight: 600 !important;
         line-height: 1.35 !important;
@@ -1681,17 +1760,21 @@
 
     body.news .news-side-block .information a,
     body.news .news-side-block .comment {
-        color: #ba332a !important;
+        color: #2e51a2 !important;
     }
 
-    body.news .news-container .tags .tag {
-        background: var(--m-accent-bg) !important;
-        color: var(--m-accent) !important;
-        border: none !important;
+    body.news .news-container .tags .tag,
+    body.news .news-unit .tags .tag {
+        background: #edf2fb !important;
+        color: #2e51a2 !important;
+        border: 1px solid #c9d4e4 !important;
         border-radius: 4px !important;
-        font-size: 10px !important;
-        font-weight: 600 !important;
-        text-transform: uppercase !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        margin-left: 6px !important;
+        padding: 5px 8px !important;
+        text-transform: none !important;
     }
 
     body.news .news-side-block .header,
@@ -1701,11 +1784,12 @@
     }
 
     body.news .menu-category .btn-category {
-        color: var(--m-text2) !important;
+        color: #5d6b7a !important;
     }
 
     body.news .menu-category .btn-category.selected {
-        color: var(--m-accent) !important;
+        color: #2e51a2 !important;
+        border-bottom-color: #2e51a2 !important;
     }
 
     /* ═══ NEWS DETAIL COMMENTS ═══ */
