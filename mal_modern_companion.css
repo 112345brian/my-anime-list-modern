@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.1.0
+@version        6.2.0
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -730,6 +730,23 @@
     }
 
     /* ═══ DETAIL PAGES ═══ */
+    body.mal-mod-detail {
+        --m-bg: #f5f6fb;
+        --m-bg1: #ffffff;
+        --m-bg2: #edf1f7;
+        --m-bg3: #dce4f0;
+        --m-bg4: #0a0a0e;
+        --m-text: #1f2933;
+        --m-text2: #5b6775;
+        --m-text3: #8793a1;
+        --m-accent: #2e51a2;
+        --m-accent2: #1d3f86;
+        --m-accent-bg: rgba(46, 81, 162, .12);
+        --m-border: #cfd8e6;
+        --m-border2: #e1e7f0;
+        background: var(--m-bg) !important;
+    }
+
     .anime-detail-header-stats,
     .anime-detail-header-stats .stats-block {
         background: var(--m-bg1) !important;
@@ -776,6 +793,10 @@
     body.mal-mod-detail #js-oped-black-bg {
         display: none !important;
         pointer-events: none !important;
+    }
+
+    body.mal-mod-detail .mal-mod-source-hidden {
+        display: none !important;
     }
 
     body.mal-mod-detail #content {
@@ -833,9 +854,9 @@
         width: 100% !important;
         min-height: 40px !important;
         padding: 10px 12px !important;
-        background: var(--m-text) !important;
+        background: var(--m-accent) !important;
         color: var(--m-bg1) !important;
-        border: 1px solid var(--m-text) !important;
+        border: 1px solid var(--m-accent) !important;
         border-radius: var(--m-r-sm) !important;
         font-weight: 800 !important;
         text-align: center !important;
@@ -909,6 +930,11 @@
         line-height: .98 !important;
         letter-spacing: 0 !important;
         color: var(--m-text) !important;
+    }
+
+    body.mal-mod-detail .leftside>div:first-child {
+        position: sticky !important;
+        top: 18px !important;
     }
 
     body.mal-mod-detail .horiznav_nav,
@@ -1019,7 +1045,7 @@
         width: 108px !important;
         min-width: 108px !important;
         padding: 12px !important;
-        background: #161616 !important;
+        background: var(--m-accent) !important;
         border-radius: var(--m-r-sm) !important;
         color: var(--m-bg1) !important;
         text-align: center !important;
@@ -1112,8 +1138,8 @@
     body.mal-mod-detail .user-status-block .btn-user-status-add-list {
         min-width: 138px !important;
         padding: 8px 12px !important;
-        background: var(--m-text) !important;
-        border: 1px solid var(--m-text) !important;
+        background: var(--m-accent) !important;
+        border: 1px solid var(--m-accent) !important;
         border-radius: var(--m-r-sm) !important;
         color: var(--m-bg1) !important;
         text-align: center !important;
@@ -1139,6 +1165,181 @@
         overflow: hidden !important;
     }
 
+    body.mal-mod-detail .mal-mod-lb-tabs {
+        display: flex !important;
+        gap: 24px !important;
+        margin: 32px 0 0 !important;
+        padding: 0 !important;
+        border-bottom: 1px solid var(--m-border) !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-tab {
+        appearance: none !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid transparent !important;
+        border-radius: 0 !important;
+        color: var(--m-text2) !important;
+        cursor: pointer !important;
+        font-family: var(--m-font) !important;
+        font-size: 14px !important;
+        font-weight: 900 !important;
+        letter-spacing: .12em !important;
+        line-height: 1 !important;
+        padding: 0 0 13px !important;
+        text-transform: uppercase !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-tab:hover,
+    body.mal-mod-detail .mal-mod-lb-tab.is-active {
+        border-color: var(--m-accent) !important;
+        color: var(--m-text) !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-stage {
+        min-height: 340px !important;
+        padding: 26px 0 36px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-panel[hidden] {
+        display: none !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-panel {
+        max-width: 980px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-panel-head {
+        margin-bottom: 16px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-panel-head p {
+        color: var(--m-accent) !important;
+        font-size: 11px !important;
+        font-weight: 900 !important;
+        letter-spacing: .16em !important;
+        margin: 0 0 8px !important;
+        text-transform: uppercase !important;
+    }
+
+    body.mal-mod-detail .mal-mod-lb-panel-head h2 {
+        border: none !important;
+        color: var(--m-text) !important;
+        font-size: 28px !important;
+        font-weight: 900 !important;
+        letter-spacing: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-transform: none !important;
+    }
+
+    body.mal-mod-detail .mal-mod-overview-copy {
+        color: var(--m-text) !important;
+        font-size: 20px !important;
+        font-weight: 500 !important;
+        line-height: 1.65 !important;
+        max-width: 900px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-fact-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-fact {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r-sm) !important;
+        padding: 13px 14px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-fact span {
+        color: var(--m-text3) !important;
+        display: block !important;
+        font-size: 10px !important;
+        font-weight: 900 !important;
+        letter-spacing: .13em !important;
+        margin-bottom: 6px !important;
+        text-transform: uppercase !important;
+    }
+
+    body.mal-mod-detail .mal-mod-fact strong {
+        color: var(--m-text) !important;
+        display: block !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+    }
+
+    body.mal-mod-detail .mal-mod-review-stack {
+        display: grid !important;
+        gap: 12px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-review-stack .review-element,
+    body.mal-mod-detail .mal-mod-review-stack .thumbbody {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        color: var(--m-text) !important;
+        margin: 0 !important;
+        padding: 16px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-review-stack .body {
+        color: var(--m-text2) !important;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+    }
+
+    body.mal-mod-detail .mal-mod-review-stack,
+    body.mal-mod-detail .mal-mod-review-stack div,
+    body.mal-mod-detail .mal-mod-review-stack span,
+    body.mal-mod-detail .mal-mod-review-stack p {
+        color: var(--m-text2) !important;
+    }
+
+    body.mal-mod-detail .mal-mod-review-stack a {
+        color: var(--m-accent) !important;
+    }
+
+    body.mal-mod-detail .mal-mod-review-stack img {
+        border-radius: 50% !important;
+    }
+
+    body.mal-mod-detail .mal-mod-cast-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-cast-grid .left-column,
+    body.mal-mod-detail .mal-mod-cast-grid .right-column {
+        float: none !important;
+        width: 100% !important;
+    }
+
+    body.mal-mod-detail .mal-mod-cast-grid table {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r-sm) !important;
+        display: block !important;
+        margin: 0 0 10px !important;
+        overflow: hidden !important;
+        padding: 8px !important;
+    }
+
+    body.mal-mod-detail .mal-mod-cast-grid td.borderClass {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    body.mal-mod-detail .mal-mod-empty {
+        color: var(--m-text2) !important;
+        margin: 0 !important;
+    }
+
     body.mal-mod-detail .rightside h2 {
         margin: 34px 0 12px !important;
         padding: 0 0 10px !important;
@@ -1157,6 +1358,11 @@
         color: var(--m-text) !important;
         font-size: 16px !important;
         line-height: 1.72 !important;
+    }
+
+    body.mal-mod-detail .mal-mod-source-hidden {
+        display: none !important;
+        pointer-events: none !important;
     }
 
     body.mal-mod-detail .rightside .borderClass,

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.1.0
+// @version      6.2.0
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -158,6 +158,148 @@
     if (!document.querySelector('.anime-detail-header-stats') || !document.querySelector('h1.title-name')) return;
     document.body.classList.add('mal-mod-detail');
 
+    function setDetailView(view) {
+      document.body.setAttribute('data-mal-detail-view', view);
+      document.querySelectorAll('.mal-mod-lb-tab').forEach(function (btn) {
+        btn.classList.toggle('is-active', btn.getAttribute('data-view') === view);
+      });
+      document.querySelectorAll('.mal-mod-lb-panel').forEach(function (panel) {
+        panel.hidden = panel.getAttribute('data-view') !== view;
+      });
+    }
+
+    function makePanel(view, title) {
+      var panel = document.createElement('section');
+      panel.className = 'mal-mod-lb-panel';
+      panel.setAttribute('data-view', view);
+      panel.innerHTML = '<div class="mal-mod-lb-panel-head"><p>' + view + '</p><h2>' + title + '</h2></div>';
+      return panel;
+    }
+
+    function buildFactGrid() {
+      var grid = document.createElement('div');
+      grid.className = 'mal-mod-fact-grid';
+      Array.from(document.querySelectorAll('.leftside .spaceit_pad')).forEach(function (row) {
+        var labelNode = row.querySelector('.dark_text');
+        var text = row.textContent.replace(/\s+/g, ' ').trim();
+        if (!text || text.length > 220 || text.indexOf(':') === -1) return;
+        var label = labelNode ? labelNode.textContent.replace(':', '').trim() : text.split(':')[0].trim();
+        var value = text.replace(labelNode ? labelNode.textContent : label + ':', '').trim();
+        if (!label || !value || /Score|Ranked|Popularity|Members|Favorites/i.test(label)) return;
+        var item = document.createElement('div');
+        item.className = 'mal-mod-fact';
+        item.innerHTML = '<span>' + label + '</span><strong>' + value + '</strong>';
+        grid.appendChild(item);
+      });
+      return grid;
+    }
+
+    function buildReviewPanel(panel) {
+      var reviews = Array.from(document.querySelectorAll('.review-element.js-review-element')).slice(0, 4);
+      var list = document.createElement('div');
+      list.className = 'mal-mod-review-stack';
+      reviews.forEach(function (review) {
+        list.appendChild(review.cloneNode(true));
+      });
+      if (!reviews.length) {
+        list.innerHTML = '<p class="mal-mod-empty">No reviews are surfaced on this page yet.</p>';
+      }
+      reviews.forEach(function (review) {
+        review.classList.add('mal-mod-source-hidden');
+      });
+      var reviewsHeading = Array.from(document.querySelectorAll('.rightside h2')).find(function (h2) {
+        return h2.textContent.trim() === 'Reviews';
+      });
+      if (reviewsHeading) reviewsHeading.classList.add('mal-mod-source-hidden');
+      panel.appendChild(list);
+    }
+
+    function buildCastPanel(panel) {
+      var source = document.querySelector('.detail-characters-list');
+      if (!source) {
+        panel.insertAdjacentHTML('beforeend', '<p class="mal-mod-empty">No character list is surfaced on this page yet.</p>');
+        return;
+      }
+      var cast = source.cloneNode(true);
+      cast.classList.add('mal-mod-cast-grid');
+      panel.appendChild(cast);
+      source.classList.add('mal-mod-source-hidden');
+      var castHeading = document.querySelector('#characters');
+      if (castHeading && castHeading.parentElement) castHeading.parentElement.classList.add('mal-mod-source-hidden');
+    }
+
+    function buildLetterboxdStage() {
+      if (document.querySelector('.mal-mod-lb-stage')) return;
+      var right = document.querySelector('.rightside');
+      var topBlock = document.querySelector('.rightside .pb16');
+      if (!right || !topBlock) return;
+
+      var tabs = document.createElement('nav');
+      tabs.className = 'mal-mod-lb-tabs';
+      var handleTab = function (event) {
+        var btn = event.target.closest && event.target.closest('.mal-mod-lb-tab');
+        if (!btn) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setDetailView(btn.getAttribute('data-view'));
+      };
+      tabs.addEventListener('pointerdown', handleTab, true);
+      tabs.addEventListener('click', handleTab, true);
+      [
+        ['overview', 'Overview'],
+        ['details', 'Details'],
+        ['reviews', 'Reviews'],
+        ['cast', 'Cast']
+      ].forEach(function (tab) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mal-mod-lb-tab';
+        btn.setAttribute('data-view', tab[0]);
+        btn.textContent = tab[1];
+        tabs.appendChild(btn);
+      });
+
+      var stage = document.createElement('div');
+      stage.className = 'mal-mod-lb-stage';
+
+      var overview = makePanel('overview', 'Story');
+      var desc = document.querySelector('[itemprop="description"]');
+      var copy = document.createElement('div');
+      copy.className = 'mal-mod-overview-copy';
+      if (desc) copy.textContent = desc.textContent.replace(/\s+/g, ' ').trim();
+      overview.appendChild(copy);
+      document.querySelectorAll('[itemprop="description"]').forEach(function (el) {
+        el.classList.add('mal-mod-source-hidden');
+      });
+      var synopsisHeading = document.querySelector('#synopsis');
+      if (synopsisHeading && synopsisHeading.parentElement) synopsisHeading.parentElement.classList.add('mal-mod-source-hidden');
+
+      var details = makePanel('details', 'Details');
+      details.appendChild(buildFactGrid());
+
+      var reviews = makePanel('reviews', 'Reviews');
+      buildReviewPanel(reviews);
+
+      var cast = makePanel('cast', 'Cast');
+      buildCastPanel(cast);
+
+      stage.appendChild(overview);
+      stage.appendChild(details);
+      stage.appendChild(reviews);
+      stage.appendChild(cast);
+
+      topBlock.insertAdjacentElement('afterend', tabs);
+      tabs.insertAdjacentElement('afterend', stage);
+      var cursor = stage.nextSibling;
+      while (cursor) {
+        var next = cursor.nextSibling;
+        if (cursor.nodeType === 1 && /Related Entries|Characters & Voice Actors|Reviews|Recommendations/.test(cursor.textContent || '')) break;
+        if (cursor.nodeType === 1) cursor.classList.add('mal-mod-source-hidden');
+        cursor = next;
+      }
+      setDetailView('overview');
+    }
+
     var removeDetailClutter = function () {
       removeGuestSignupBar();
       document.querySelectorAll('.mal-tooltip-layer, mal-tooltip').forEach(function (el) {
@@ -172,6 +314,7 @@
       });
     };
 
+    buildLetterboxdStage();
     removeDetailClutter();
     setTimeout(removeDetailClutter, 800);
     setTimeout(removeDetailClutter, 2200);

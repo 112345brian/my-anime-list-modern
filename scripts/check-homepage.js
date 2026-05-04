@@ -130,6 +130,8 @@ async function dismissPrivacy(page) {
       hasDetailClass: document.body.classList.contains('mal-mod-detail'),
       titleVisible: Boolean(titleBox && titleBox.width > 200 && titleBox.height > 30),
       wideCanvas: Boolean(wrapperBox && wrapperBox.width >= 1300),
+      visibleLetterboxdTabs: visible('.mal-mod-lb-tab'),
+      visibleLetterboxdStage: visible('.mal-mod-lb-stage'),
       visibleConsentOverlays: visible('[id^="qc-cmp"], [class*="qc-cmp"]'),
       visibleTooltips: visible('.mal-tooltip-layer, mal-tooltip'),
       hoverPreviewInjected: Boolean(document.querySelector('#mal-mod-preview'))
@@ -139,6 +141,8 @@ async function dismissPrivacy(page) {
   if (!detailSummary.hasDetailClass) throw new Error('Detail page class was not applied.');
   if (!detailSummary.titleVisible) throw new Error('Anime detail title is not visible.');
   if (!detailSummary.wideCanvas) throw new Error('Anime detail canvas is still narrow.');
+  if (detailSummary.visibleLetterboxdTabs < 4) throw new Error('Detail page tabs were not rendered.');
+  if (detailSummary.visibleLetterboxdStage < 1) throw new Error('Detail page tab stage was not rendered.');
   if (detailSummary.visibleConsentOverlays > 0) throw new Error('Consent overlay is still visible on detail page.');
   if (detailSummary.visibleTooltips > 0) throw new Error('MAL tooltip layer is still visible on detail page.');
   if (detailSummary.hoverPreviewInjected) throw new Error('Custom hover preview should be disabled.');
