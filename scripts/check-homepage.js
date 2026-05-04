@@ -105,9 +105,47 @@ async function dismissPrivacy(page) {
     throw new Error('News headline click navigated to the wrong URL.');
   }
   await clickablePage.close();
+
+  const detailPage = await browser.newPage({ viewport: { width: 1800, height: 1200 } });
+  await detailPage.goto('https://myanimelist.net/anime/21677/Captain_Earth', {
+    waitUntil: 'domcontentloaded',
+    timeout: 45000
+  });
+  await detailPage.addStyleTag({ content: unwrapUserStyle(fs.readFileSync(stylePath, 'utf8')) });
+  await detailPage.addScriptTag({ content: fs.readFileSync(scriptPath, 'utf8') });
+  await detailPage.waitForTimeout(2200);
+  await detailPage.screenshot({ path: path.join(outDir, 'anime-detail.png'), fullPage: false });
+
+  const detailSummary = await detailPage.evaluate(() => {
+    const visible = (selector) => Array.from(document.querySelectorAll(selector))
+      .filter((el) => {
+        const cs = getComputedStyle(el);
+        const box = el.getBoundingClientRect();
+        return cs.display !== 'none' && cs.visibility !== 'hidden' && box.width > 0 && box.height > 0;
+      }).length;
+    const titleBox = document.querySelector('h1.title-name strong')?.getBoundingClientRect();
+    const wrapperBox = document.querySelector('#contentWrapper')?.getBoundingClientRect();
+
+    return {
+      hasDetailClass: document.body.classList.contains('mal-mod-detail'),
+      titleVisible: Boolean(titleBox && titleBox.width > 200 && titleBox.height > 30),
+      wideCanvas: Boolean(wrapperBox && wrapperBox.width >= 1300),
+      visibleConsentOverlays: visible('[id^="qc-cmp"], [class*="qc-cmp"]'),
+      visibleTooltips: visible('.mal-tooltip-layer, mal-tooltip'),
+      hoverPreviewInjected: Boolean(document.querySelector('#mal-mod-preview'))
+    };
+  });
+
+  if (!detailSummary.hasDetailClass) throw new Error('Detail page class was not applied.');
+  if (!detailSummary.titleVisible) throw new Error('Anime detail title is not visible.');
+  if (!detailSummary.wideCanvas) throw new Error('Anime detail canvas is still narrow.');
+  if (detailSummary.visibleConsentOverlays > 0) throw new Error('Consent overlay is still visible on detail page.');
+  if (detailSummary.visibleTooltips > 0) throw new Error('MAL tooltip layer is still visible on detail page.');
+  if (detailSummary.hoverPreviewInjected) throw new Error('Custom hover preview should be disabled.');
+  await detailPage.close();
   await browser.close();
 
-  console.log(JSON.stringify(summary, null, 2));
+  console.log(JSON.stringify({ homepage: summary, animeDetail: detailSummary }, null, 2));
 })().catch((error) => {
   console.error(error);
   process.exit(1);

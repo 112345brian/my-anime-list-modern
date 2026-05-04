@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.0.9
+// @version      6.1.0
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -20,7 +20,7 @@
   var FEATURES = {
     newsFirst: true,
     hideClutter: true,
-    hoverPreview: true,
+    hoverPreview: false,
     keyboardNav: true,
     backToTop: true,
     readingProgress: true
@@ -154,8 +154,39 @@
     });
   }
 
+  function modernizeDetailPage() {
+    if (!document.querySelector('.anime-detail-header-stats') || !document.querySelector('h1.title-name')) return;
+    document.body.classList.add('mal-mod-detail');
+
+    var removeDetailClutter = function () {
+      removeGuestSignupBar();
+      document.querySelectorAll('.mal-tooltip-layer, mal-tooltip').forEach(function (el) {
+        el.setAttribute('style', 'display:none!important;pointer-events:none!important;');
+      });
+
+      Array.from(document.querySelectorAll('#content h2')).forEach(function (h2) {
+        if (!/MALxJapan/i.test(h2.textContent || '')) return;
+        var row = h2.closest('tr');
+        var cell = h2.closest('td.pb24') || h2.closest('td');
+        (row || cell || h2.parentElement).setAttribute('style', 'display:none!important;');
+      });
+    };
+
+    removeDetailClutter();
+    setTimeout(removeDetailClutter, 800);
+    setTimeout(removeDetailClutter, 2200);
+
+    var observer = new MutationObserver(removeDetailClutter);
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   // ── Homepage ─────────────────────────────────────────────────────────────
   var isHome = /^\/?$/.test(window.location.pathname);
+
+  neutralizeConsentBlocker();
+  modernizeDetailPage();
+  setTimeout(neutralizeConsentBlocker, 1200);
+  setTimeout(neutralizeConsentBlocker, 3000);
 
   if (isHome) {
     restoreHomepageLinkClicks();

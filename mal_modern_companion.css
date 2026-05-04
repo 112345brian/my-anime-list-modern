@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.0.9
+@version        6.1.0
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -194,8 +194,14 @@
     .header-bnr,
     [class*="mini_banner"],
     .header-ad,
-    .launch-ad {
+    .launch-ad,
+    #qc-cmp2-container,
+    .qc-cmp2-container,
+    .qc-cmp-cleanslate,
+    [id^="qc-cmp"],
+    [class*="qc-cmp"] {
         display: none !important;
+        pointer-events: none !important;
     }
 
     /* ═══ SECTION HEADERS ═══ */
@@ -744,6 +750,473 @@
     .page-common .spaceit_pad {
         color: var(--m-text) !important;
         line-height: 1.65 !important;
+    }
+
+    body.mal-mod-detail #contentWrapper {
+        max-width: 1500px !important;
+        width: 100% !important;
+        padding: 0 36px 56px !important;
+        background: var(--m-bg) !important;
+    }
+
+    body.mal-mod-detail #myanimelist,
+    body.mal-mod-detail .wrapper,
+    body.mal-mod-detail #headerSmall,
+    body.mal-mod-detail #menu {
+        width: min(100%, 1500px) !important;
+        max-width: 1500px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    body.mal-mod-detail .banner-header-anime-straming,
+    body.mal-mod-detail .header-mini-banner,
+    body.mal-mod-detail .btn-mal-service,
+    body.mal-mod-detail #js-oped-popup,
+    body.mal-mod-detail #js-oped-black-bg {
+        display: none !important;
+        pointer-events: none !important;
+    }
+
+    body.mal-mod-detail #content {
+        width: 100% !important;
+        max-width: none !important;
+        padding-top: 18px !important;
+    }
+
+    body.mal-mod-detail #content>table {
+        width: 100% !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+    }
+
+    body.mal-mod-detail #content>table>tbody>tr>td.borderClass {
+        width: 292px !important;
+        min-width: 292px !important;
+        padding: 0 20px 32px 0 !important;
+        background: transparent !important;
+        border: none !important;
+        vertical-align: top !important;
+    }
+
+    body.mal-mod-detail #content>table>tbody>tr>td:not(.borderClass) {
+        padding-left: 28px !important;
+        background: transparent !important;
+        vertical-align: top !important;
+    }
+
+    body.mal-mod-detail .leftside {
+        width: 272px !important;
+        padding: 0 !important;
+        color: var(--m-text2) !important;
+        font-size: 14px !important;
+    }
+
+    body.mal-mod-detail .leftside>div:first-child img {
+        width: 272px !important;
+        max-width: 272px !important;
+        height: auto !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r) !important;
+        box-shadow: 0 18px 44px rgba(42, 36, 26, .16) !important;
+    }
+
+    body.mal-mod-detail .leftside .profileRows {
+        border: none !important;
+        margin: 14px 0 0 !important;
+        padding: 0 !important;
+    }
+
+    body.mal-mod-detail .leftside .profileRows a,
+    body.mal-mod-detail .leftside .js-form-user-status-btn {
+        display: block !important;
+        width: 100% !important;
+        min-height: 40px !important;
+        padding: 10px 12px !important;
+        background: var(--m-text) !important;
+        color: var(--m-bg1) !important;
+        border: 1px solid var(--m-text) !important;
+        border-radius: var(--m-r-sm) !important;
+        font-weight: 800 !important;
+        text-align: center !important;
+        line-height: 1.3 !important;
+    }
+
+    body.mal-mod-detail .leftside .profileRows a:hover,
+    body.mal-mod-detail .leftside .js-form-user-status-btn:hover {
+        background: var(--m-accent2) !important;
+        border-color: var(--m-accent2) !important;
+        color: #fff !important;
+    }
+
+    body.mal-mod-detail .leftside h2,
+    body.mal-mod-detail .leftside .normal_header {
+        margin: 28px 0 10px !important;
+        padding: 0 0 8px !important;
+        border-bottom: 1px solid var(--m-border) !important;
+        color: var(--m-text) !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        letter-spacing: .14em !important;
+        text-transform: uppercase !important;
+    }
+
+    body.mal-mod-detail .leftside .spaceit_pad {
+        padding: 5px 0 !important;
+        color: var(--m-text2) !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+    }
+
+    body.mal-mod-detail .leftside .dark_text {
+        color: var(--m-text) !important;
+        font-weight: 800 !important;
+    }
+
+    body.mal-mod-detail .rightside {
+        width: 100% !important;
+        max-width: none !important;
+        color: var(--m-text) !important;
+    }
+
+    body.mal-mod-detail .h1.edit-info,
+    body.mal-mod-detail .h1-title,
+    body.mal-mod-detail div[itemprop="name"] {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    body.mal-mod-detail .h1.edit-info>*:not(.h1-title) {
+        display: none !important;
+    }
+
+    body.mal-mod-detail h1.title-name {
+        display: block !important;
+        margin: 0 0 18px !important;
+        padding: 0 0 18px !important;
+        border-bottom: 1px solid var(--m-border) !important;
+        background: transparent !important;
+    }
+
+    body.mal-mod-detail h1.title-name strong {
+        display: block !important;
+        max-width: 980px !important;
+        font-size: 48px !important;
+        line-height: .98 !important;
+        letter-spacing: 0 !important;
+        color: var(--m-text) !important;
+    }
+
+    body.mal-mod-detail .horiznav_nav,
+    body.mal-mod-detail .js-scrollfix-bottom,
+    body.mal-mod-detail .rightside>div:first-child,
+    body.mal-mod-detail .rightside ul:first-of-type {
+        margin: 0 0 18px !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        overflow: visible !important;
+    }
+
+    body.mal-mod-detail .horiznav_nav ul,
+    body.mal-mod-detail .js-scrollfix-bottom ul,
+    body.mal-mod-detail .rightside>div:first-child ul,
+    body.mal-mod-detail .rightside ul:first-of-type {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    body.mal-mod-detail .horiznav_nav ul li,
+    body.mal-mod-detail .js-scrollfix-bottom ul li,
+    body.mal-mod-detail .rightside>div:first-child ul li,
+    body.mal-mod-detail .rightside ul:first-of-type li {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    body.mal-mod-detail .horiznav_nav ul li a,
+    body.mal-mod-detail .js-scrollfix-bottom ul li a,
+    body.mal-mod-detail .rightside>div:first-child ul li a,
+    body.mal-mod-detail .rightside ul:first-of-type li a {
+        display: block !important;
+        min-height: 32px !important;
+        padding: 7px 11px !important;
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: 999px !important;
+        color: var(--m-text2) !important;
+        font-size: 12px !important;
+        font-weight: 800 !important;
+        line-height: 16px !important;
+        text-transform: none !important;
+    }
+
+    body.mal-mod-detail .horiznav_nav ul li a:hover,
+    body.mal-mod-detail .js-scrollfix-bottom ul li a:hover,
+    body.mal-mod-detail .rightside>div:first-child ul li a:hover,
+    body.mal-mod-detail .rightside ul:first-of-type li a:hover,
+    body.mal-mod-detail .horiznav_nav ul li a.here,
+    body.mal-mod-detail .rightside>div:first-child ul li a.horiznav_active,
+    body.mal-mod-detail .rightside ul:first-of-type li a.horiznav_active {
+        background: var(--m-text) !important;
+        border-color: var(--m-text) !important;
+        color: var(--m-bg1) !important;
+    }
+
+    body.mal-mod-detail .breadcrumb {
+        margin: 0 0 22px !important;
+        color: var(--m-text3) !important;
+        font-size: 13px !important;
+    }
+
+    body.mal-mod-detail .pb16 .di-t.w100 {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 260px !important;
+        gap: 18px !important;
+        align-items: start !important;
+        width: 100% !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 0 22px !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .stats-block {
+        display: flex !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        min-height: 92px !important;
+        padding: 14px !important;
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r) !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .stats-block::after {
+        content: none !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .stats-block .score {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        width: 108px !important;
+        min-width: 108px !important;
+        padding: 12px !important;
+        background: #161616 !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-bg1) !important;
+        text-align: center !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .score-label {
+        background: transparent !important;
+        color: var(--m-bg3) !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+        letter-spacing: .12em !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .score .score-label.score-6 {
+        color: var(--m-bg1) !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .score .score-label::before {
+        color: var(--m-bg1) !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .score .score-label,
+    body.mal-mod-detail .anime-detail-header-stats .score .score-value {
+        color: var(--m-bg1) !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .score .score-value {
+        font-size: 34px !important;
+        font-weight: 900 !important;
+        line-height: 1 !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .stats-block .di-ib {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        flex: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .numbers {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        min-height: 64px !important;
+        padding: 10px 12px !important;
+        background: var(--m-bg) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-text) !important;
+        font-size: 17px !important;
+        font-weight: 900 !important;
+        line-height: 1.12 !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .numbers span {
+        color: var(--m-text2) !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+        letter-spacing: .12em !important;
+        text-transform: uppercase !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-stats .information {
+        display: none !important;
+    }
+
+    body.mal-mod-detail .user-status-block {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        min-height: 46px !important;
+        margin: 10px 0 0 !important;
+        padding: 8px !important;
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r) !important;
+        box-shadow: none !important;
+    }
+
+    body.mal-mod-detail .user-status-block a {
+        color: var(--m-text2) !important;
+        font-size: 12px !important;
+        font-weight: 800 !important;
+    }
+
+    body.mal-mod-detail .user-status-block .btn-user-status-add-list {
+        min-width: 138px !important;
+        padding: 8px 12px !important;
+        background: var(--m-text) !important;
+        border: 1px solid var(--m-text) !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-bg1) !important;
+        text-align: center !important;
+    }
+
+    body.mal-mod-detail .mal-tooltip-layer,
+    body.mal-mod-detail mal-tooltip {
+        display: none !important;
+        pointer-events: none !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-video {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    body.mal-mod-detail .anime-detail-header-video .video-promotion,
+    body.mal-mod-detail .anime-detail-header-video iframe,
+    body.mal-mod-detail .anime-detail-header-video img {
+        border-radius: var(--m-r) !important;
+        overflow: hidden !important;
+    }
+
+    body.mal-mod-detail .rightside h2 {
+        margin: 34px 0 12px !important;
+        padding: 0 0 10px !important;
+        border-bottom: 1px solid var(--m-border) !important;
+        color: var(--m-text) !important;
+        font-size: 12px !important;
+        font-weight: 900 !important;
+        letter-spacing: .14em !important;
+        text-transform: uppercase !important;
+    }
+
+    body.mal-mod-detail span[itemprop="description"],
+    body.mal-mod-detail [itemprop="description"] {
+        display: block !important;
+        max-width: 980px !important;
+        color: var(--m-text) !important;
+        font-size: 16px !important;
+        line-height: 1.72 !important;
+    }
+
+    body.mal-mod-detail .rightside .borderClass,
+    body.mal-mod-detail .rightside td {
+        border-color: var(--m-border2) !important;
+    }
+
+    body.mal-mod-detail .rightside .bgColor1,
+    body.mal-mod-detail .rightside .bgColor2 {
+        background: var(--m-bg1) !important;
+    }
+
+    body.mal-mod-detail .detail-page-featured-article,
+    body.mal-mod-detail .detail-page-featured-article .news-list {
+        background: transparent !important;
+    }
+
+    @media (max-width: 900px) {
+        body.mal-mod-detail #contentWrapper {
+            padding: 0 18px 40px !important;
+        }
+
+        body.mal-mod-detail #content>table,
+        body.mal-mod-detail #content>table>tbody,
+        body.mal-mod-detail #content>table>tbody>tr,
+        body.mal-mod-detail #content>table>tbody>tr>td {
+            display: block !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            padding: 0 !important;
+        }
+
+        body.mal-mod-detail .leftside {
+            width: 100% !important;
+            margin-bottom: 24px !important;
+        }
+
+        body.mal-mod-detail .leftside>div:first-child img {
+            width: min(100%, 320px) !important;
+            max-width: 320px !important;
+        }
+
+        body.mal-mod-detail h1.title-name strong {
+            font-size: 34px !important;
+        }
+
+        body.mal-mod-detail .pb16 .di-t.w100 {
+            display: block !important;
+        }
+
+        body.mal-mod-detail .anime-detail-header-stats .stats-block,
+        body.mal-mod-detail .anime-detail-header-stats .stats-block .di-ib {
+            display: block !important;
+        }
+
+        body.mal-mod-detail .anime-detail-header-stats .stats-block .score,
+        body.mal-mod-detail .anime-detail-header-stats .numbers {
+            width: 100% !important;
+            margin-bottom: 8px !important;
+        }
     }
 
     /* ═══ SEASONAL PAGE ═══ */
