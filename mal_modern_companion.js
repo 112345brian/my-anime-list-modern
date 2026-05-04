@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.0.8
+// @version      6.0.9
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -146,6 +146,14 @@
     }, true);
   }
 
+  function removeGuestSignupBar() {
+    document.querySelectorAll('.bottom-bar.ga-impression, .bottom-bar').forEach(function (el) {
+      if (/ditch the text file|Keep track of your anime|Sign Up\\s+Login/i.test(el.textContent || '')) {
+        el.setAttribute('style', 'display:none!important;pointer-events:none!important;');
+      }
+    });
+  }
+
   // ── Homepage ─────────────────────────────────────────────────────────────
   var isHome = /^\/?$/.test(window.location.pathname);
 
@@ -165,8 +173,11 @@
       if (!content) return;
       document.body.classList.add('mal-mod-home');
       neutralizeConsentBlocker();
+      removeGuestSignupBar();
       setTimeout(neutralizeConsentBlocker, 1200);
       setTimeout(neutralizeConsentBlocker, 3000);
+      setTimeout(removeGuestSignupBar, 1200);
+      setTimeout(removeGuestSignupBar, 3000);
 
       // Full-width editorial canvas; ranking sidebars are intentionally removed.
       var left = content.querySelector('.left-column');

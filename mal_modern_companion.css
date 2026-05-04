@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.0.8
+@version        6.0.9
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -681,6 +681,11 @@
 
     .page-common #footer-block a {
         color: var(--m-text2) !important;
+    }
+
+    .bottom-bar.ga-impression {
+        display: none !important;
+        pointer-events: none !important;
     }
 
     /* ═══ FORMS ═══ */

@@ -68,12 +68,13 @@ async function dismissPrivacy(page) {
     const firstTitle = document.querySelector('.mal-mod-newsroom .news-unit h3 a') ||
       document.querySelector('.mal-mod-newsroom .news-unit a');
 
-    return {
-      hasFrontpage: Boolean(document.querySelector('#mal-mod-frontpage')),
-      visibleRankingWidgets: visible('.airing_ranking, .upcoming_ranking, .popular_ranking'),
-      visibleNewsUnits: visible('.mal-mod-newsroom .news-unit'),
-      visibleSections: visible('.mal-mod-section'),
-      firstNewsTitle: firstTitle ? firstTitle.textContent.trim() : ''
+      return {
+        hasFrontpage: Boolean(document.querySelector('#mal-mod-frontpage')),
+        visibleRankingWidgets: visible('.airing_ranking, .upcoming_ranking, .popular_ranking'),
+        visibleGuestSignupBars: visible('.bottom-bar.ga-impression, .bottom-bar'),
+        visibleNewsUnits: visible('.mal-mod-newsroom .news-unit'),
+        visibleSections: visible('.mal-mod-section'),
+        firstNewsTitle: firstTitle ? firstTitle.textContent.trim() : ''
     };
   });
 
@@ -81,6 +82,7 @@ async function dismissPrivacy(page) {
 
   if (!summary.hasFrontpage) throw new Error('Editorial front page was not injected.');
   if (summary.visibleRankingWidgets > 0) throw new Error('Static ranking widgets are still visible.');
+  if (summary.visibleGuestSignupBars > 0) throw new Error('Guest signup bottom bar is still visible.');
   if (summary.visibleNewsUnits < 1) throw new Error('No news units were visible in the news lead.');
   if (summary.visibleSections < 4) throw new Error('Expected multiple editorial sections.');
 
