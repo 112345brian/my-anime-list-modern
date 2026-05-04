@@ -74,6 +74,7 @@ async function dismissPrivacy(page) {
         visibleGuestSignupBars: visible('.bottom-bar.ga-impression, .bottom-bar'),
         visibleNewsUnits: visible('.mal-mod-newsroom .news-unit'),
         visibleSections: visible('.mal-mod-section'),
+        visiblePulseCards: visible('.mal-mod-pulse-card'),
         firstNewsTitle: firstTitle ? firstTitle.textContent.trim() : ''
     };
   });
@@ -85,6 +86,7 @@ async function dismissPrivacy(page) {
   if (summary.visibleGuestSignupBars > 0) throw new Error('Guest signup bottom bar is still visible.');
   if (summary.visibleNewsUnits < 1) throw new Error('No news units were visible in the news lead.');
   if (summary.visibleSections < 4) throw new Error('Expected multiple editorial sections.');
+  if (summary.visiblePulseCards !== 4) throw new Error('Community Pulse should render four cards.');
 
   const clickablePage = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
   await clickablePage.goto('https://myanimelist.net/', {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.2.1
+// @version      6.2.2
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -151,6 +151,29 @@
       if (/ditch the text file|Keep track of your anime|Sign Up\\s+Login/i.test(el.textContent || '')) {
         el.setAttribute('style', 'display:none!important;pointer-events:none!important;');
       }
+    });
+  }
+
+  function modernizeCommunityPulse(section) {
+    var content = section && section.querySelector('.widget-content');
+    if (!content || content.querySelector('.mal-mod-pulse-card')) return;
+
+    var cards = [];
+    var items = Array.from(content.children);
+    for (var i = 0; i < items.length; i++) {
+      if (!items[i].matches || !items[i].matches('h3.discussions_h3')) continue;
+      var byline = items[i + 1] && items[i + 1].matches('p') ? items[i + 1] : null;
+      var card = document.createElement('article');
+      card.className = 'mal-mod-pulse-card';
+      card.appendChild(items[i].cloneNode(true));
+      if (byline) card.appendChild(byline.cloneNode(true));
+      cards.push(card);
+    }
+
+    if (!cards.length) return;
+    content.innerHTML = '';
+    cards.slice(0, 4).forEach(function (card) {
+      content.appendChild(card);
     });
   }
 
@@ -418,11 +441,12 @@
         placeWidget(newsSection, news);
         placeWidget(featureSection, featured);
         placeWidget(discussionSection, discussions);
+        modernizeCommunityPulse(discussionSection);
         side.appendChild(featureSection);
-        side.appendChild(discussionSection);
         lead.appendChild(newsSection);
         lead.appendChild(side);
         shell.appendChild(lead);
+        shell.appendChild(discussionSection);
 
         var now = document.createElement('div');
         now.className = 'mal-mod-now-grid';
