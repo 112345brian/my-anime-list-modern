@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.0.1
+@version        6.0.2
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -990,13 +990,35 @@
     }
 
     body.index.mal-mod-home #contentWrapper {
+        width: 100% !important;
         max-width: 1240px !important;
         padding: 0 24px 44px !important;
         background: #f4f1e8 !important;
     }
 
+    body.index.mal-mod-home #myanimelist {
+        width: 100% !important;
+        max-width: 1240px !important;
+        margin: 0 auto !important;
+    }
+
+    body.index.mal-mod-home #myanimelist,
+    body.index.mal-mod-home #contentWrapper,
+    body.index.mal-mod-home #content,
+    body.index.mal-mod-home .left-column {
+        min-width: 0 !important;
+    }
+
     body.index.mal-mod-home #content {
         background: transparent !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    body.index.mal-mod-home .left-column,
+    body.index.mal-mod-home #mal-mod-frontpage {
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     body.index.mal-mod-home #malHeader,
@@ -1043,7 +1065,7 @@
 
     .mal-mod-masthead {
         display: block !important;
-        padding: 32px 0 24px !important;
+        padding: 24px 0 22px !important;
         border-top: 5px solid #171715 !important;
         border-bottom: 1px solid #bfb5a5 !important;
     }
@@ -1062,14 +1084,14 @@
         margin: 0 !important;
         max-width: 1040px !important;
         color: #191917 !important;
-        font-size: clamp(42px, 7vw, 88px) !important;
-        line-height: .88 !important;
+        font-size: clamp(44px, 6vw, 72px) !important;
+        line-height: .92 !important;
         font-weight: 800 !important;
     }
 
     .mal-mod-deck {
-        max-width: 660px !important;
-        margin: 18px 0 0 !important;
+        max-width: 720px !important;
+        margin: 14px 0 0 !important;
         color: #5f5a50 !important;
         font-size: 17px !important;
         line-height: 1.5 !important;
@@ -1196,7 +1218,7 @@
 
     #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story {
         grid-column: 1 / -1 !important;
-        grid-template-columns: minmax(190px, 38%) minmax(0, 1fr) !important;
+        grid-template-columns: 220px minmax(0, 1fr) !important;
         padding: 0 0 16px !important;
         border-top: 0 !important;
         border-bottom: 3px solid #171715 !important;
@@ -1222,7 +1244,7 @@
     }
 
     #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story .picSurround img {
-        height: 310px !important;
+        height: 280px !important;
     }
 
     #mal-mod-frontpage .news-unit-right {
@@ -1251,8 +1273,9 @@
 
     #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story h3.title a,
     #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story h3 a {
-        font-size: 34px !important;
-        line-height: .98 !important;
+        color: #191917 !important;
+        font-size: 29px !important;
+        line-height: 1.03 !important;
     }
 
     #mal-mod-frontpage .news-unit h3.title a:hover,
@@ -1319,8 +1342,18 @@
     #mal-mod-frontpage .mal-mod-side-stack .news-unit h3.title a,
     #mal-mod-frontpage .mal-mod-side-stack .news-unit h3 a,
     #mal-mod-frontpage .mal-mod-side-stack .widget.featured .news-unit-right .text {
-        font-size: 15px !important;
-        line-height: 1.18 !important;
+        font-size: 14px !important;
+        line-height: 1.22 !important;
+    }
+
+    #mal-mod-frontpage .mal-mod-side-stack .text,
+    #mal-mod-frontpage .mal-mod-side-stack .text p {
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        font-size: 12px !important;
+        line-height: 1.35 !important;
     }
 
     #mal-mod-frontpage .mal-mod-side-stack .information,
@@ -1472,6 +1505,15 @@
     }
 
     @media (max-width: 900px) {
+        body.index.mal-mod-home #myanimelist,
+        body.index.mal-mod-home #contentWrapper,
+        body.index.mal-mod-home #content,
+        body.index.mal-mod-home .left-column,
+        body.index.mal-mod-home #mal-mod-frontpage {
+            width: auto !important;
+            max-width: none !important;
+        }
+
         body.index.mal-mod-home #contentWrapper {
             padding: 0 16px 36px !important;
         }
@@ -1488,7 +1530,7 @@
         }
 
         #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story .picSurround img {
-            height: 260px !important;
+            height: 240px !important;
         }
 
         #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story h3.title a,
@@ -1498,12 +1540,47 @@
     }
 
     @media (max-width: 640px) {
+        body.index.mal-mod-home #myanimelist {
+            overflow-x: hidden !important;
+        }
+
+        body.index.mal-mod-home #malHeader {
+            height: 36px !important;
+            overflow: hidden !important;
+        }
+
+        body.index.mal-mod-home #malHeader .header-bnr,
+        body.index.mal-mod-home #malHeader [class*="bnr"],
+        body.index.mal-mod-home #malHeader [class*="banner"],
+        body.index.mal-mod-home #malHeader a[href*="login"],
+        body.index.mal-mod-home #malHeader a[href*="register"],
+        body.index.mal-mod-home #malHeader a[href*="signup"],
+        body.index.mal-mod-home #menu_right {
+            display: none !important;
+        }
+
+        body.index.mal-mod-home #menu {
+            width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+        }
+
+        body.index.mal-mod-home #menu_left,
+        body.index.mal-mod-home #nav {
+            width: max-content !important;
+            min-width: 100% !important;
+        }
+
+        body.index.mal-mod-home #content {
+            padding: 0 !important;
+        }
+
         .mal-mod-masthead {
-            padding-top: 24px !important;
+            padding-top: 20px !important;
         }
 
         .mal-mod-masthead h1 {
-            font-size: 42px !important;
+            font-size: 40px !important;
         }
 
         .mal-mod-deck {
@@ -1526,6 +1603,20 @@
             width: 100% !important;
             height: auto !important;
             max-height: 300px !important;
+        }
+
+        #mal-mod-frontpage .mal-mod-newsroom .news-unit:not(.mal-mod-lead-story) .picSurround {
+            display: none !important;
+        }
+
+        #mal-mod-frontpage .mal-mod-newsroom .news-unit:not(.mal-mod-lead-story) {
+            padding: 14px 0 !important;
+        }
+
+        #mal-mod-frontpage .mal-mod-newsroom .news-unit:not(.mal-mod-lead-story) h3.title a,
+        #mal-mod-frontpage .mal-mod-newsroom .news-unit:not(.mal-mod-lead-story) h3 a {
+            font-size: 17px !important;
+            line-height: 1.2 !important;
         }
 
         .mal-mod-section-head {

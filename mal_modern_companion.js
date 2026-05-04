@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.0.1
+// @version      6.0.2
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -118,6 +118,14 @@
   var isHome = /^\/?$/.test(window.location.pathname);
 
   if (isHome) {
+    var viewport = document.querySelector('meta[name="viewport"]');
+    if (!viewport) {
+      viewport = document.createElement('meta');
+      viewport.name = 'viewport';
+      document.head.appendChild(viewport);
+    }
+    viewport.content = 'width=device-width, initial-scale=1';
+
     // Run a bit after DOMContentLoaded so widgets are rendered
     setTimeout(function () {
       var content = document.querySelector('#content');
