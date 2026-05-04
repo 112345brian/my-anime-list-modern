@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.0.0
+@version        6.0.1
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -1042,10 +1042,7 @@
     }
 
     .mal-mod-masthead {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) auto !important;
-        gap: 28px !important;
-        align-items: end !important;
+        display: block !important;
         padding: 32px 0 24px !important;
         border-top: 5px solid #171715 !important;
         border-bottom: 1px solid #bfb5a5 !important;
@@ -1063,7 +1060,7 @@
 
     .mal-mod-masthead h1 {
         margin: 0 !important;
-        max-width: 820px !important;
+        max-width: 1040px !important;
         color: #191917 !important;
         font-size: clamp(42px, 7vw, 88px) !important;
         line-height: .88 !important;
@@ -1078,15 +1075,6 @@
         line-height: 1.5 !important;
     }
 
-    .mal-mod-masthead nav {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-        justify-content: flex-end !important;
-        max-width: 360px !important;
-    }
-
-    .mal-mod-masthead nav a,
     .mal-mod-section-head a {
         border: 1px solid #bfb5a5 !important;
         border-radius: 999px !important;
@@ -1099,7 +1087,6 @@
         letter-spacing: .04em !important;
     }
 
-    .mal-mod-masthead nav a:hover,
     .mal-mod-section-head a:hover {
         background: #171715 !important;
         border-color: #171715 !important;
@@ -1317,6 +1304,12 @@
 
     #mal-mod-frontpage .mal-mod-side-stack .news-unit {
         grid-template-columns: minmax(0, 1fr) !important;
+        padding: 16px 20px !important;
+        background: #ebe6da !important;
+    }
+
+    #mal-mod-frontpage .mal-mod-side-stack .news-unit:hover {
+        background: #e2dacb !important;
     }
 
     #mal-mod-frontpage .mal-mod-side-stack .news-unit .picSurround {
@@ -1328,6 +1321,17 @@
     #mal-mod-frontpage .mal-mod-side-stack .widget.featured .news-unit-right .text {
         font-size: 15px !important;
         line-height: 1.18 !important;
+    }
+
+    #mal-mod-frontpage .mal-mod-side-stack .information,
+    #mal-mod-frontpage .mal-mod-side-stack .information p {
+        white-space: normal !important;
+        overflow: visible !important;
+    }
+
+    #mal-mod-frontpage .mal-mod-side-stack .tags,
+    #mal-mod-frontpage .mal-mod-side-stack .tag {
+        display: none !important;
     }
 
     .mal-mod-pulse h3.discussions_h3,
@@ -1393,9 +1397,44 @@
     .mal-mod-video .btn-anime .title,
     .mal-mod-video .btn-anime .title a {
         color: #191917 !important;
+        background: #fffdf7 !important;
         font-size: 12px !important;
         font-weight: 800 !important;
         line-height: 1.2 !important;
+        text-shadow: none !important;
+    }
+
+    .mal-mod-season .btn-anime .title,
+    .mal-mod-video .btn-anime .title {
+        display: block !important;
+        min-height: 38px !important;
+        padding: 8px !important;
+        overflow: hidden !important;
+    }
+
+    .mal-mod-video .btn-anime a,
+    .mal-mod-video .btn-anime .external-link,
+    .mal-mod-video .btn-anime .external-link a,
+    .mal-mod-video .btn-anime .title a {
+        color: #191917 !important;
+    }
+
+    .mal-mod-video .btn-anime .external-link {
+        display: block !important;
+        min-height: 24px !important;
+        padding: 5px 8px !important;
+        background: #ebe6da !important;
+        color: #5f5a50 !important;
+        font-size: 11px !important;
+        line-height: 1.25 !important;
+        text-shadow: none !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .mal-mod-video .btn-anime .external-link a {
+        color: #5f5a50 !important;
     }
 
     .mal-mod-reviews .item,
@@ -1442,11 +1481,6 @@
         .mal-mod-now-grid,
         .mal-mod-lower-grid {
             grid-template-columns: 1fr !important;
-        }
-
-        .mal-mod-masthead nav {
-            justify-content: flex-start !important;
-            max-width: none !important;
         }
 
         #mal-mod-frontpage .mal-mod-newsroom .news-unit.mal-mod-lead-story {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.0
+// @version      6.0.1
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -175,11 +175,9 @@
         shell.innerHTML =
           '<header class="mal-mod-masthead">' +
           '<div><p class="mal-mod-kicker">Anime and manga dispatch</p>' +
-          '<h1>MyAnimeList, as a live magazine</h1>' +
-          '<p class="mal-mod-deck">News, features, reviews, discussions, seasonal premieres, and fresh video drops before static popularity charts.</p></div>' +
-          '<nav aria-label="Modern MyAnimeList sections">' +
-          '<a href="/news">News</a><a href="/featured">Features</a><a href="/forum/">Forums</a><a href="/anime/season">Season</a>' +
-          '</nav></header>';
+          '<h1>MyAnimeList</h1>' +
+          '<p class="mal-mod-deck">News first, with features, reviews, and community activity close behind. Seasonal listings and video updates sit lower on the page where they belong.</p></div>' +
+          '</header>';
 
         var lead = document.createElement('div');
         lead.className = 'mal-mod-lead-grid';
@@ -205,8 +203,6 @@
         placeWidget(videoSection, episodes || trailers);
         now.appendChild(seasonSection);
         now.appendChild(videoSection);
-        shell.appendChild(now);
-
         var lower = document.createElement('div');
         lower.className = 'mal-mod-lower-grid';
         var reviewSection = makeSection('Latest Reviews', 'Critic stream', '/reviews.php?t=anime', 'mal-mod-reviews');
@@ -216,6 +212,7 @@
         lower.appendChild(reviewSection);
         lower.appendChild(recSection);
         shell.appendChild(lower);
+        shell.appendChild(now);
 
         nc.prepend(shell);
         Array.from(nc.children).forEach(function (child) {
