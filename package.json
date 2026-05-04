@@ -1,6 +1,6 @@
 {
   "name": "my-anime-list-modern",
-  "version": "6.0.7",
+  "version": "6.0.8",
   "private": true,
   "description": "News-first MyAnimeList userscript and userstyle modernization.",
   "scripts": {
