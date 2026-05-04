@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MAL Modern Companion
 // @namespace    http://tampermonkey.net/
-// @version      6.0.3
+// @version      6.0.5
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
 // @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
@@ -114,10 +114,43 @@
     return true;
   }
 
+  function neutralizeConsentBlocker() {
+    [
+      '#qc-cmp2-container',
+      '.qc-cmp2-container',
+      '.qc-cmp-cleanslate',
+      '[id^="qc-cmp"]',
+      '[class*="qc-cmp"]'
+    ].forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        el.setAttribute('style', 'display:none!important;pointer-events:none!important;');
+      });
+    });
+  }
+
+  function restoreHomepageLinkClicks() {
+    window.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target && e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      if (!document.body.classList.contains('mal-mod-home')) return;
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || /^javascript:/i.test(href)) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (a.target === '_blank') {
+        window.open(a.href, '_blank', 'noopener');
+      } else {
+        window.location.href = a.href;
+      }
+    }, true);
+  }
+
   // ── Homepage ─────────────────────────────────────────────────────────────
   var isHome = /^\/?$/.test(window.location.pathname);
 
   if (isHome) {
+    restoreHomepageLinkClicks();
     var viewport = document.querySelector('meta[name="viewport"]');
     if (!viewport) {
       viewport = document.createElement('meta');
@@ -131,6 +164,9 @@
       var content = document.querySelector('#content');
       if (!content) return;
       document.body.classList.add('mal-mod-home');
+      neutralizeConsentBlocker();
+      setTimeout(neutralizeConsentBlocker, 1200);
+      setTimeout(neutralizeConsentBlocker, 3000);
 
       // Full-width editorial canvas; ranking sidebars are intentionally removed.
       var left = content.querySelector('.left-column');

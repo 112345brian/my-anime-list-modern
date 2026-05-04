@@ -78,12 +78,32 @@ async function dismissPrivacy(page) {
   });
 
   await page.screenshot({ path: path.join(outDir, 'homepage.png'), fullPage: false });
-  await browser.close();
 
   if (!summary.hasFrontpage) throw new Error('Editorial front page was not injected.');
   if (summary.visibleRankingWidgets > 0) throw new Error('Static ranking widgets are still visible.');
   if (summary.visibleNewsUnits < 1) throw new Error('No news units were visible in the news lead.');
   if (summary.visibleSections < 4) throw new Error('Expected multiple editorial sections.');
+
+  const clickablePage = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
+  await clickablePage.goto('https://myanimelist.net/', {
+    waitUntil: 'domcontentloaded',
+    timeout: 45000
+  });
+  await clickablePage.addStyleTag({ content: unwrapUserStyle(fs.readFileSync(stylePath, 'utf8')) });
+  await clickablePage.addScriptTag({ content: fs.readFileSync(scriptPath, 'utf8') });
+  await clickablePage.waitForSelector('#mal-mod-frontpage', { timeout: 10000 });
+  await clickablePage.waitForTimeout(1500);
+  const newsHref = await clickablePage.locator('.mal-mod-newsroom .news-unit h3 a').first().getAttribute('href');
+  await clickablePage.locator('.mal-mod-newsroom .news-unit h3 a').first().click({ timeout: 5000 });
+  await clickablePage.waitForTimeout(800);
+  if (clickablePage.url() === 'https://myanimelist.net/') {
+    throw new Error('News headline click did not navigate.');
+  }
+  if (newsHref && !clickablePage.url().startsWith(newsHref)) {
+    throw new Error('News headline click navigated to the wrong URL.');
+  }
+  await clickablePage.close();
+  await browser.close();
 
   console.log(JSON.stringify(summary, null, 2));
 })().catch((error) => {
