@@ -4,6 +4,8 @@
 // @version      6.0
 // @description  Editorial news desk, hover previews, keyboard nav for MyAnimeList
 // @author       You
+// @downloadURL  https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
+// @updateURL    https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.js
 // @match        https://myanimelist.net/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=myanimelist.net
 // @grant        none
