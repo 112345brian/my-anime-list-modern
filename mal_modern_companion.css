@@ -1,0 +1,986 @@
+/* ==UserStyle==
+@name           MAL Modern v5
+@namespace      github.com/openstyles/stylus
+@version        5.0.0
+@description    Modern layout transformation for MyAnimeList
+@author         You
+==/UserStyle== */
+
+@-moz-document domain("myanimelist.net") {
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+        --m-bg: #0d0d11;
+        --m-bg1: #13131a;
+        --m-bg2: #18181f;
+        --m-bg3: #1f1f28;
+        --m-bg4: #26262f;
+        --m-text: #e8e8ec;
+        --m-text2: #9494a0;
+        --m-text3: #5a5a68;
+        --m-accent: #5b8def;
+        --m-accent2: #7ba4ff;
+        --m-accent-bg: rgba(91, 141, 239, .10);
+        --m-border: #222228;
+        --m-border2: #1a1a22;
+        --m-r: 12px;
+        --m-r-sm: 7px;
+        --m-font: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* ═══ BASE ═══ */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    body,
+    body.page-common,
+    body.index {
+        background: var(--m-bg) !important;
+        color: var(--m-text) !important;
+        font-family: var(--m-font) !important;
+        -webkit-font-smoothing: antialiased !important;
+    }
+
+    a,
+    .page-common a,
+    body a {
+        color: var(--m-accent) !important;
+        text-decoration: none !important;
+    }
+
+    a:hover,
+    .page-common a:hover {
+        color: var(--m-accent2) !important;
+    }
+
+    .page-common .dark_text,
+    .page-common .fn-grey2,
+    .page-common .fn-grey5,
+    .page-common .fn-grey6 {
+        color: var(--m-text2) !important;
+    }
+
+    .page-common .fn-black {
+        color: var(--m-text) !important;
+    }
+
+    .page-common .bgColor1 {
+        background: var(--m-bg1) !important;
+    }
+
+    .page-common .bgColor2 {
+        background: var(--m-bg) !important;
+    }
+
+    .page-common .borderClass,
+    td.borderClass {
+        background: var(--m-bg1) !important;
+        border-color: var(--m-border2) !important;
+    }
+
+    .page-common .border_top,
+    .page-common .border_bottom {
+        border-color: var(--m-border2) !important;
+    }
+
+    /* ═══ HEADER ═══ */
+    body.page-common #malHeader,
+    #malHeader,
+    body #menu,
+    html body #menu,
+    body.page-common #menu {
+        background: #0a0a0e !important;
+        background-image: none !important;
+        border-bottom: 1px solid var(--m-border) !important;
+    }
+
+    .page-common #nav li a,
+    #menu a {
+        color: var(--m-text2) !important;
+        font-family: var(--m-font) !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+    }
+
+    .page-common #nav li a:hover,
+    .page-common #nav li.hover a {
+        color: #fff !important;
+        background: rgba(255, 255, 255, .05) !important;
+    }
+
+    .page-common #menu .sub-menu,
+    #malHeader .sub-menu {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r) !important;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, .5) !important;
+    }
+
+    .page-common #topSearchText,
+    body.page-common #searchBar.searchBar #topSearchValue {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-text) !important;
+    }
+
+    .page-common .incrementalSearchResultList,
+    .page-common .incrementalSearchResultList .list {
+        background: var(--m-bg1) !important;
+        border-color: var(--m-border) !important;
+    }
+
+    .page-common .incrementalSearchResultList .list.separator {
+        background: var(--m-bg2) !important;
+    }
+
+    .page-common .incrementalSearchResultList .list.focus {
+        background: var(--m-bg3) !important;
+    }
+
+    .page-common .header-profile.link-bg,
+    body.page-common .header-profile.link-bg.on {
+        background: var(--m-bg2) !important;
+        color: var(--m-text) !important;
+    }
+
+    /* ═══ LAYOUT ═══ */
+    .page-common #contentWrapper,
+    body.index #contentWrapper {
+        background: var(--m-bg) !important;
+        max-width: 1020px !important;
+        margin: 0 auto !important;
+        padding: 0 28px !important;
+    }
+
+    .page-common #content,
+    body.index #content {
+        background: var(--m-bg) !important;
+        border: none !important;
+    }
+
+    body.index .left-column,
+    body.page-common .left-column {
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    body.index .h1,
+    .page-common .h1 {
+        display: none !important;
+    }
+
+    /* ═══ HIDE CLUTTER ═══ */
+    body.index .widget.mxj,
+    body.index .widget.bookstores-recommend-plugin-bL1ppqjf,
+    [id*="mal_cs"],
+    [class*="ad-unit"],
+    [class*="adsense"],
+    .ad,
+    .ads,
+    .ad-area,
+    .ad-bg,
+    .footer-ad-unit,
+    #rec_ranking,
+    .PDA_top,
+    [class*="PDA"],
+    .mini-banner,
+    .header-bnr,
+    [class*="mini_banner"],
+    .header-ad,
+    .launch-ad {
+        display: none !important;
+    }
+
+    /* ═══ SECTION HEADERS ═══ */
+    body.index .widget .widget-header,
+    body.index .widget .widget-header h2,
+    .page-common h2.index_h2_seo,
+    .page-common h2 {
+        background: transparent !important;
+        background-image: none !important;
+        font-family: var(--m-font) !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: var(--m-text2) !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.index .widget .widget-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 0 0 12px !important;
+        margin: 44px 0 18px !important;
+        border-left: 2px solid var(--m-accent) !important;
+    }
+
+    body.index .widget .widget-header a {
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: var(--m-text3) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.10em !important;
+    }
+
+    body.index .widget .widget-header a:hover {
+        color: var(--m-accent) !important;
+    }
+
+    /* Injected LATEST NEWS header */
+    #mal-mod-news-hdr {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        border-left: 2px solid var(--m-accent) !important;
+        padding: 0 0 0 12px !important;
+        margin: 24px 0 18px !important;
+    }
+
+    /* ═══ NEWS CARDS — THE MAIN FIX ═══ */
+
+    /* Container */
+    body.index .widget.news .widget-content .news-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    /* Card */
+    body.index .widget.news .news-unit {
+        position: relative !important;
+        /* ← key for z-index context */
+        display: flex !important;
+        gap: 16px !important;
+        align-items: flex-start !important;
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        padding: 16px !important;
+        margin: 0 !important;
+        transition: background .15s, border-color .15s, box-shadow .2s !important;
+        overflow: visible !important;
+        /* don't clip child links */
+    }
+
+    body.index .widget.news .news-unit:hover {
+        background: var(--m-bg3) !important;
+        border-color: var(--m-border) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, .3) !important;
+    }
+
+    /* ══ THE ACTUAL LINK FIX ══
+   Clearfix ::before / ::after pseudo-elements become invisible
+   full-size blocks inside flex containers and eat pointer events.
+   Kill them completely and make all real links z-index safe. */
+    body.index .widget.news .news-unit::before,
+    body.index .widget.news .news-unit::after {
+        display: none !important;
+        content: none !important;
+        pointer-events: none !important;
+        position: static !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    body.index .widget.news .news-unit * {
+        pointer-events: auto !important;
+    }
+
+    body.index .widget.news .news-unit a {
+        position: relative !important;
+        z-index: 2 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    /* Image */
+    body.index .widget.news .news-unit .picSurround {
+        flex-shrink: 0 !important;
+        width: 76px !important;
+    }
+
+    body.index .widget.news .news-unit .picSurround a {
+        display: block !important;
+    }
+
+    body.index .widget.news .news-unit .picSurround img {
+        width: 76px !important;
+        height: 108px !important;
+        object-fit: cover !important;
+        border-radius: 8px !important;
+        display: block !important;
+    }
+
+    /* Text block */
+    body.index .widget.news .news-unit .news-unit-right {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+
+    body.index .widget.news .news-unit h3.title {
+        margin: 0 0 6px !important;
+    }
+
+    body.index .widget.news .news-unit h3.title a {
+        color: var(--m-text) !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+        display: block !important;
+    }
+
+    body.index .widget.news .news-unit h3.title a:hover {
+        color: var(--m-accent2) !important;
+    }
+
+    body.index .widget.news .news-unit .text,
+    body.index .widget.news .news-unit .text p {
+        color: var(--m-text2) !important;
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+        margin: 0 0 8px !important;
+    }
+
+    body.index .widget.news .news-unit .information,
+    body.index .widget.news .news-unit .information p {
+        color: var(--m-text3) !important;
+        font-size: 12px !important;
+        margin: 0 !important;
+    }
+
+    body.index .widget.news .news-unit .information a {
+        color: var(--m-text3) !important;
+    }
+
+    body.index .widget.news .news-unit .information a:hover {
+        color: var(--m-accent) !important;
+    }
+
+    /* First card hero size */
+    body.index .widget.news .news-unit:first-child {
+        padding: 20px !important;
+    }
+
+    body.index .widget.news .news-unit:first-child .picSurround {
+        width: 100px !important;
+    }
+
+    body.index .widget.news .news-unit:first-child .picSurround img {
+        width: 100px !important;
+        height: 140px !important;
+    }
+
+    body.index .widget.news .news-unit:first-child h3.title a {
+        font-size: 17px !important;
+    }
+
+    /* ═══ FEATURED (same link fix) ═══ */
+    body.index .widget.featured .news-unit {
+        position: relative !important;
+        display: flex !important;
+        gap: 16px !important;
+        align-items: flex-start !important;
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        padding: 16px !important;
+        margin: 0 0 8px !important;
+        transition: background .15s, box-shadow .2s !important;
+    }
+
+    body.index .widget.featured .news-unit:hover {
+        background: var(--m-bg3) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, .25) !important;
+    }
+
+    body.index .widget.featured .news-unit::before,
+    body.index .widget.featured .news-unit::after {
+        display: none !important;
+        content: none !important;
+        pointer-events: none !important;
+    }
+
+    body.index .widget.featured .news-unit a {
+        position: relative !important;
+        z-index: 2 !important;
+        pointer-events: auto !important;
+    }
+
+    body.index .widget.featured .picSurround img {
+        width: 70px !important;
+        height: 98px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+    }
+
+    body.index .widget.featured .news-unit-right .text {
+        color: var(--m-text) !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        line-height: 1.4 !important;
+    }
+
+    body.index .widget.featured .information {
+        color: var(--m-text3) !important;
+        font-size: 12px !important;
+    }
+
+    body.index .widget.featured .tags .tag {
+        background: rgba(232, 167, 53, .12) !important;
+        color: #e8a735 !important;
+        border: none !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        padding: 2px 6px !important;
+    }
+
+    /* ═══ SEASONAL ═══ */
+    body.index .widget.seasonal .widget-slide-block,
+    .widget-slide-block {
+        background: transparent !important;
+    }
+
+    body.index .widget-slide .btn-anime,
+    .widget-slide .btn-anime {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        overflow: hidden !important;
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease !important;
+    }
+
+    body.index .widget-slide .btn-anime:hover {
+        transform: translateY(-4px) scale(1.02) !important;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, .4) !important;
+        border-color: var(--m-accent) !important;
+    }
+
+    body.index .widget-slide .btn-anime img {
+        border-radius: var(--m-r) var(--m-r) 0 0 !important;
+        transition: transform .3s ease !important;
+    }
+
+    body.index .widget-slide .btn-anime:hover img {
+        transform: scale(1.06) !important;
+    }
+
+    .widget-slide .btn-anime .title a,
+    .widget-slide .btn-anime .title {
+        color: var(--m-text) !important;
+        font-family: var(--m-font) !important;
+        font-weight: 600 !important;
+        font-size: 12px !important;
+        line-height: 1.35 !important;
+    }
+
+    .widget-slide .btn-anime .title a:hover {
+        color: var(--m-accent2) !important;
+    }
+
+    .widget-slide .btn-anime .external-link {
+        background: var(--m-bg2) !important;
+    }
+
+    .widget-slide-block .btn-widget-slide-side {
+        background: var(--m-bg3) !important;
+        border: 1px solid var(--m-border) !important;
+        opacity: 0.7 !important;
+    }
+
+    .widget-slide-block .btn-widget-slide-side:hover {
+        opacity: 1 !important;
+    }
+
+    body.index .widget-slide-outer {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    body.index .widget-slide-outer::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* ═══ EPISODE VIDEOS ═══ */
+    .btn-anime.episode {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        overflow: hidden !important;
+        transition: transform .2s, box-shadow .2s !important;
+    }
+
+    .btn-anime.episode:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .35) !important;
+    }
+
+    /* ═══ TRAILERS ═══ */
+    body.index .widget.popular_promotion_video .btn-anime {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        overflow: hidden !important;
+        transition: transform .2s, box-shadow .2s !important;
+    }
+
+    body.index .widget.popular_promotion_video .btn-anime:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .35) !important;
+    }
+
+    /* ═══ DISCUSSIONS ═══ */
+    body.index .widget.anime_discussions .widget-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+    }
+
+    body.index .widget.anime_discussions h3.discussions_h3 {
+        background: var(--m-bg2) !important;
+        border: none !important;
+        border-radius: var(--m-r-sm) var(--m-r-sm) 0 0 !important;
+        padding: 12px 16px 4px !important;
+        margin: 6px 0 0 !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+
+    body.index .widget.anime_discussions h3.discussions_h3 a {
+        color: var(--m-text) !important;
+    }
+
+    body.index .widget.anime_discussions h3.discussions_h3 a:hover {
+        color: var(--m-accent2) !important;
+    }
+
+    body.index .widget.anime_discussions .borderClass {
+        background: var(--m-bg2) !important;
+        border: none !important;
+        border-radius: 0 0 var(--m-r-sm) var(--m-r-sm) !important;
+        padding: 2px 16px 10px !important;
+        margin: 0 0 2px !important;
+        color: var(--m-text3) !important;
+        font-size: 12px !important;
+    }
+
+    body.index .widget.anime_discussions .borderClass a {
+        color: var(--m-accent) !important;
+    }
+
+    /* ═══ REVIEWS ═══ */
+    body.index .widget.reviews .widget-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    body.index .widget.reviews .item {
+        display: flex !important;
+        gap: 16px !important;
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        padding: 16px !important;
+        transition: background .15s !important;
+    }
+
+    body.index .widget.reviews .item:hover {
+        background: var(--m-bg3) !important;
+    }
+
+    body.index .widget.reviews .item .image img {
+        border-radius: 8px !important;
+        width: 70px !important;
+        height: 98px !important;
+        object-fit: cover !important;
+    }
+
+    body.index .widget.reviews h3.reviews_h3 a {
+        color: var(--m-text) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+    }
+
+    body.index .widget.reviews .textReadability {
+        color: var(--m-text2) !important;
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    /* ═══ RECOMMENDATIONS ═══ */
+    body.index .widget.recommendations .widget-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    body.index .widget.recommendations .item {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        padding: 16px !important;
+        transition: background .15s !important;
+    }
+
+    body.index .widget.recommendations .item:hover {
+        background: var(--m-bg3) !important;
+    }
+
+    body.index .widget.recommendations .item img {
+        border-radius: 6px !important;
+    }
+
+    /* ═══ HOVERINFO ═══ */
+    .hoverinfo {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r) !important;
+    }
+
+    .page-common a.button_add,
+    .page-common a.button_edit {
+        background: var(--m-accent-bg) !important;
+        color: var(--m-accent) !important;
+        border: none !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+        font-weight: 600 !important;
+        padding: 2px 8px !important;
+    }
+
+    /* ═══ FOOTER ═══ */
+    body.index .footer-ranking {
+        background: var(--m-bg1) !important;
+        border-radius: var(--m-r) !important;
+        padding: 20px !important;
+        margin: 40px 0 !important;
+    }
+
+    .page-common #footer-block {
+        background: #08080c !important;
+        border-top: 1px solid var(--m-border) !important;
+        color: var(--m-text3) !important;
+    }
+
+    .page-common #footer-block a {
+        color: var(--m-text2) !important;
+    }
+
+    /* ═══ FORMS ═══ */
+    select,
+    .page-common .inputtext,
+    .page-common .textarea,
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        background: var(--m-bg2) !important;
+        color: var(--m-text) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r-sm) !important;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: var(--m-accent) !important;
+        box-shadow: 0 0 0 3px var(--m-accent-bg) !important;
+        outline: none !important;
+    }
+
+    .page-common .btn-form-submit {
+        background: #1a2d50 !important;
+        color: var(--m-accent) !important;
+        border-radius: var(--m-r-sm) !important;
+    }
+
+    .page-common .normal_header {
+        background: transparent !important;
+        color: var(--m-text) !important;
+        font-family: var(--m-font) !important;
+        font-weight: 700 !important;
+        border-bottom: 1px solid var(--m-border) !important;
+    }
+
+    /* ═══ DETAIL PAGES ═══ */
+    .anime-detail-header-stats,
+    .anime-detail-header-stats .stats-block {
+        background: var(--m-bg1) !important;
+    }
+
+    .anime-detail-header-stats .stats-block .score,
+    .anime-detail-header-stats .stats-block .numbers {
+        color: var(--m-text) !important;
+    }
+
+    h1.title-name strong {
+        font-family: var(--m-font) !important;
+        font-weight: 800 !important;
+        color: var(--m-text) !important;
+    }
+
+    span[itemprop="description"],
+    .page-common .spaceit_pad {
+        color: var(--m-text) !important;
+        line-height: 1.65 !important;
+    }
+
+    /* ═══ SEASONAL PAGE ═══ */
+    .seasonal-anime-list .seasonal-anime {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+        transition: transform .2s, box-shadow .2s !important;
+    }
+
+    .seasonal-anime-list .seasonal-anime:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .3) !important;
+    }
+
+    .seasonal-anime-list .seasonal-anime .genres {
+        background: var(--m-bg1) !important;
+    }
+
+    .seasonal-anime-list .seasonal-anime .genres .genre {
+        background: var(--m-accent-bg) !important;
+        color: var(--m-accent) !important;
+        border: none !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+        font-weight: 600 !important;
+    }
+
+    .seasonal-anime-list .seasonal-anime .information .info,
+    .seasonal-anime-list .seasonal-anime .information .scormem {
+        background: var(--m-bg1) !important;
+        color: var(--m-text2) !important;
+    }
+
+    .seasonal-anime-list .seasonal-anime .prodsrc {
+        background: var(--m-bg3) !important;
+    }
+
+    .navi-seasonal,
+    .navi-seasonal .horiznav_nav ul li a {
+        background: var(--m-bg) !important;
+    }
+
+    /* ═══ RANKINGS ═══ */
+    .top-ranking-table tr.ranking-list td {
+        background: var(--m-bg2) !important;
+        border-color: var(--m-border2) !important;
+    }
+
+    .top-ranking-table tr.ranking-list:nth-of-type(odd) td {
+        background: var(--m-bg1) !important;
+    }
+
+    .top-ranking-table tr.ranking-list:hover td {
+        background: var(--m-bg3) !important;
+    }
+
+    .top-ranking-table .title a {
+        color: var(--m-text) !important;
+        font-weight: 600 !important;
+    }
+
+    .top-ranking-table .score .text.on {
+        color: var(--m-text) !important;
+    }
+
+    .ranking-digest .ranking-header {
+        background: var(--m-bg1) !important;
+        color: var(--m-text) !important;
+    }
+
+    /* ═══ FORUMS ═══ */
+    .page-forum .forum_boardrow1 {
+        background: var(--m-bg) !important;
+    }
+
+    .page-forum .forum_boardrow2,
+    .page-forum .forum-table-header {
+        background: var(--m-bg1) !important;
+    }
+
+    .page-forum .forum_category,
+    .forum .forum-header {
+        background: #1a2740 !important;
+        color: var(--m-text) !important;
+    }
+
+    .page-common .quotetext {
+        background: var(--m-bg1) !important;
+        border-left: 3px solid var(--m-accent) !important;
+    }
+
+    .page-common .codetext {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+    }
+
+    .forum .forum-board {
+        background: var(--m-bg1) !important;
+    }
+
+    /* ═══ LIST / EPISODE / PROFILE ═══ */
+    .episode_list .episode-list-header {
+        background: var(--m-bg3) !important;
+    }
+
+    .episode_list .episode-list-data td {
+        background: var(--m-bg) !important;
+        color: var(--m-text) !important;
+    }
+
+    .episode_list .episode-list-data:nth-of-type(odd) td {
+        background: var(--m-bg1) !important;
+    }
+
+    .user-profile .user-status li {
+        background: var(--m-bg) !important;
+    }
+
+    .user-profile .user-status li:nth-of-type(even) {
+        background: var(--m-bg1) !important;
+    }
+
+    .profile .user-comments .comment {
+        background: var(--m-bg1) !important;
+    }
+
+    .list-unit .list-status-title {
+        background: var(--m-bg1) !important;
+        color: var(--m-text) !important;
+    }
+
+    .list-table .list-table-data {
+        background: var(--m-bg2) !important;
+        border-color: var(--m-border2) !important;
+    }
+
+    .list-table .list-table-data:hover {
+        background: var(--m-bg3) !important;
+    }
+
+    .list-table .data.title .link {
+        color: var(--m-text) !important;
+    }
+
+    .list-table .data.title .link:hover {
+        color: var(--m-accent2) !important;
+    }
+
+    /* ═══ NEWS PAGE ═══ */
+    body.news .news-container .title a {
+        color: var(--m-text) !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+    }
+
+    body.news .news-container .content {
+        color: var(--m-text2) !important;
+    }
+
+    body.news .news-container .news-info-block,
+    body.news .news-container .tags {
+        background: var(--m-bg) !important;
+    }
+
+    body.news .news-container .tags .tag {
+        background: var(--m-accent-bg) !important;
+        color: var(--m-accent) !important;
+        border: none !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+    }
+
+    body.news .news-side-block .header,
+    body.news .featured-side-block .header {
+        color: var(--m-text) !important;
+        background: transparent !important;
+    }
+
+    body.news .menu-category .btn-category {
+        color: var(--m-text2) !important;
+    }
+
+    body.news .menu-category .btn-category.selected {
+        color: var(--m-accent) !important;
+    }
+
+    /* ═══ MISC ═══ */
+    .membership .about-membership .plan,
+    .membership .about-membership .about-no-ads {
+        background: var(--m-bg1) !important;
+    }
+
+    .search_all .result-header {
+        background: #1a2d50 !important;
+        color: var(--m-text) !important;
+    }
+
+    .page-common .pagination .link {
+        background: var(--m-bg1) !important;
+        color: var(--m-accent) !important;
+        border-radius: var(--m-r-sm) !important;
+    }
+
+    .user-status-block .form-user-status,
+    .user-status-block .form-user-score {
+        background: var(--m-bg3) !important;
+        color: var(--m-accent) !important;
+    }
+
+    /* ═══ SCROLLBAR ═══ */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--m-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #2a2a34;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #38384a;
+    }
+
+    ::selection {
+        background: var(--m-accent) !important;
+        color: #fff !important;
+    }
+
+    /* Widget h2 order fix */
+    body.index .widget .widget-header h2,
+    body.index .widget .widget-header h2.index_h2_seo {
+        order: -1 !important;
+        flex: 1 !important;
+    }
+
+}
+
+/* end @-moz-document */
