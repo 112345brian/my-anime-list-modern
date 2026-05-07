@@ -175,9 +175,11 @@ async function dismissPrivacy(page) {
     const h1Style = getComputedStyle(document.querySelector('h1.forum_locheader'));
     const contentStyle = getComputedStyle(document.querySelector('div.forum-topic-message.message .content'));
     const logoStyle = getComputedStyle(document.querySelector('#headerSmall .link-mal-logo'), '::after');
+    const topicRowStyle = getComputedStyle(document.querySelector('table.forum-topics tr'));
 
     return {
       hasTimelinePost: Boolean(document.querySelector('div.forum-topic-message.message')),
+      hasRelatedTopics: Boolean(document.querySelector('table.forum-topics tr')),
       shellWidth: box('#myanimelist')?.width || 0,
       wrapperWidth: box('#myanimelist > .wrapper')?.width || 0,
       menuWidth: box('#menu')?.width || 0,
@@ -189,11 +191,17 @@ async function dismissPrivacy(page) {
       toolbarBackground: rgb('.forum.timeline .mal-navbar'),
       profileBackground: rgb('div.forum-topic-message.message .profile'),
       contentFontSize: contentStyle.fontSize,
-      contentImageWidth: box('div.forum-topic-message.message .content img')?.width || 0
+      contentImageWidth: box('div.forum-topic-message.message .content img')?.width || 0,
+      relatedTopicRowDisplay: topicRowStyle.display,
+      relatedRepliesBackground: rgb('table.forum-topics .replies'),
+      footerRankingDisplay: rgb('.footer-ranking', 'display'),
+      footerBackground: rgb('#footer-block'),
+      footerSocialDisplay: rgb('#footer-block .footer-link-icon-block', 'display')
     };
   });
 
   if (!forumSummary.hasTimelinePost) throw new Error('Forum timeline post was not visible.');
+  if (!forumSummary.hasRelatedTopics) throw new Error('Forum related topics were not visible.');
   if (forumSummary.shellWidth < 1300) throw new Error('Forum canvas is still trapped in the old narrow shell.');
   if (forumSummary.wrapperWidth < 1300) throw new Error('Forum wrapper is still trapped in the old narrow shell.');
   if (forumSummary.menuWidth < 1300) throw new Error('Forum top navigation is still trapped in the old narrow shell.');
@@ -206,6 +214,11 @@ async function dismissPrivacy(page) {
   if (forumSummary.profileBackground === 'rgb(17, 24, 39)') throw new Error('Forum user rail should not be near-black.');
   if (forumSummary.contentFontSize !== '15px') throw new Error('Forum post body font size regressed.');
   if (forumSummary.contentImageWidth > 830) throw new Error('Forum post images should be capped below the full content width.');
+  if (forumSummary.relatedTopicRowDisplay !== 'grid') throw new Error('Forum related topics should render as card rows.');
+  if (forumSummary.relatedRepliesBackground !== 'rgb(238, 242, 248)') throw new Error('Forum related-topic reply counts should use the light MAL surface.');
+  if (forumSummary.footerRankingDisplay !== 'none') throw new Error('Forum footer ranking block should be hidden.');
+  if (forumSummary.footerBackground !== 'rgb(246, 247, 251)') throw new Error('Forum footer should use the light page background.');
+  if (forumSummary.footerSocialDisplay !== 'none') throw new Error('Forum footer social/app block should be hidden.');
   await forumPage.close();
   await browser.close();
 
