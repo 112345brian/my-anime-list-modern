@@ -149,9 +149,56 @@ async function dismissPrivacy(page) {
   if (detailSummary.visibleTooltips > 0) throw new Error('MAL tooltip layer is still visible on detail page.');
   if (detailSummary.hoverPreviewInjected) throw new Error('Custom hover preview should be disabled.');
   await detailPage.close();
+
+  const forumPage = await browser.newPage({ viewport: { width: 1800, height: 1200 } });
+  await forumPage.goto('https://myanimelist.net/forum/?topicid=2213696', {
+    waitUntil: 'domcontentloaded',
+    timeout: 45000
+  });
+  await forumPage.addStyleTag({ content: unwrapUserStyle(fs.readFileSync(stylePath, 'utf8')) });
+  await forumPage.addScriptTag({ content: fs.readFileSync(scriptPath, 'utf8') });
+  await forumPage.waitForSelector('div.forum-topic-message.message', { timeout: 10000 });
+  await forumPage.waitForTimeout(1000);
+  await forumPage.screenshot({ path: path.join(outDir, 'forum-thread.png'), fullPage: false });
+
+  const forumSummary = await forumPage.evaluate(() => {
+    const rgb = (selector, prop = 'backgroundColor') => {
+      const el = document.querySelector(selector);
+      return el ? getComputedStyle(el)[prop] : '';
+    };
+    const box = (selector) => {
+      const el = document.querySelector(selector);
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      return { width: rect.width, height: rect.height };
+    };
+    const h1Style = getComputedStyle(document.querySelector('h1.forum_locheader'));
+    const contentStyle = getComputedStyle(document.querySelector('div.forum-topic-message.message .content'));
+
+    return {
+      hasTimelinePost: Boolean(document.querySelector('div.forum-topic-message.message')),
+      shellWidth: box('#myanimelist')?.width || 0,
+      postWidth: box('div.forum-topic-message.message')?.width || 0,
+      h1BorderWidth: h1Style.borderTopWidth,
+      toolbarBackground: rgb('.forum.timeline .mal-navbar'),
+      profileBackground: rgb('div.forum-topic-message.message .profile'),
+      contentFontSize: contentStyle.fontSize,
+      contentImageWidth: box('div.forum-topic-message.message .content img')?.width || 0
+    };
+  });
+
+  if (!forumSummary.hasTimelinePost) throw new Error('Forum timeline post was not visible.');
+  if (forumSummary.shellWidth < 1300) throw new Error('Forum canvas is still trapped in the old narrow shell.');
+  if (forumSummary.postWidth < 1300) throw new Error('Forum post card is still too narrow.');
+  if (forumSummary.h1BorderWidth !== '0px') throw new Error('Forum thread title still has a chip/border treatment.');
+  if (forumSummary.toolbarBackground !== 'rgb(255, 255, 255)') throw new Error('Forum toolbar should use a light MAL-like surface.');
+  if (forumSummary.profileBackground === 'rgb(17, 24, 39)') throw new Error('Forum user rail should not be near-black.');
+  if (forumSummary.contentFontSize !== '15px') throw new Error('Forum post body font size regressed.');
+  if (forumSummary.contentImageWidth > 830) throw new Error('Forum post images should be capped below the full content width.');
+  await forumPage.close();
   await browser.close();
 
-  console.log(JSON.stringify({ homepage: summary, animeDetail: detailSummary }, null, 2));
+  console.log(JSON.stringify({ homepage: summary, animeDetail: detailSummary, forumThread: forumSummary }, null, 2));
 })().catch((error) => {
   console.error(error);
   process.exit(1);
