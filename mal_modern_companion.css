@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           MAL Modern v6
 @namespace      github.com/openstyles/stylus
-@version        6.2.2
+@version        6.2.3
 @description    Editorial news-first transformation for MyAnimeList
 @author         You
 @updateURL      https://raw.githubusercontent.com/112345brian/my-anime-list-modern/main/mal_modern_companion.css
@@ -1495,6 +1495,96 @@
     }
 
     /* ═══ FORUMS ═══ */
+    body.page-forum #contentWrapper,
+    body.forum #contentWrapper {
+        max-width: 1240px !important;
+        padding: 0 32px 48px !important;
+    }
+
+    body.page-forum #content,
+    body.forum #content {
+        max-width: none !important;
+        padding-top: 18px !important;
+    }
+
+    body.page-forum .breadcrumb,
+    body.forum .breadcrumb {
+        color: var(--m-text3) !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        margin: 10px 0 12px !important;
+    }
+
+    body.page-forum .breadcrumb a,
+    body.forum .breadcrumb a {
+        color: var(--m-accent) !important;
+        font-weight: 600 !important;
+    }
+
+    body.page-forum h1,
+    body.page-forum .h1,
+    body.page-forum #content > h1,
+    body.page-forum #content > h2,
+    body.forum h1,
+    body.forum .h1,
+    body.forum #content > h1,
+    body.forum #content > h2 {
+        display: block !important;
+        color: var(--m-text) !important;
+        font-family: var(--m-font) !important;
+        font-size: 24px !important;
+        font-weight: 800 !important;
+        line-height: 1.2 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        margin: 0 0 16px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+    }
+
+    body.page-forum .forum_locheader,
+    body.page-forum .topic-reply-box,
+    body.page-forum .forum-side-block,
+    body.forum .forum_locheader,
+    body.forum .topic-reply-box,
+    body.forum .forum-side-block {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-radius: var(--m-r) !important;
+    }
+
+    body.page-forum .forum-topic-sort,
+    body.page-forum .forum-options,
+    body.page-forum .forum-search-side,
+    body.forum .forum-topic-sort,
+    body.forum .forum-options,
+    body.forum .forum-search-side {
+        background: transparent !important;
+        color: var(--m-text2) !important;
+        font-size: 13px !important;
+    }
+
+    body.page-forum .forum-topic-sort a,
+    body.page-forum .forum-options a,
+    body.forum .forum-topic-sort a,
+    body.forum .forum-options a {
+        display: inline-flex !important;
+        align-items: center !important;
+        min-height: 30px !important;
+        padding: 0 10px !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-accent) !important;
+        font-weight: 600 !important;
+    }
+
+    body.page-forum .forum-topic-sort a:hover,
+    body.page-forum .forum-options a:hover,
+    body.forum .forum-topic-sort a:hover,
+    body.forum .forum-options a:hover {
+        background: var(--m-accent-bg) !important;
+    }
+
     .page-forum .forum_boardrow1 {
         background: var(--m-bg) !important;
     }
@@ -1522,6 +1612,166 @@
 
     .forum .forum-board {
         background: var(--m-bg1) !important;
+    }
+
+    body.page-forum table.forum-topic-message,
+    body.forum table.forum-topic-message {
+        width: 100% !important;
+        margin: 0 0 24px !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r) !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        overflow: hidden !important;
+        background: var(--m-bg1) !important;
+        box-shadow: 0 10px 30px rgba(31, 41, 51, .08) !important;
+    }
+
+    body.page-forum table.forum-topic-message td,
+    body.forum table.forum-topic-message td {
+        border-color: var(--m-border2) !important;
+        font-family: var(--m-font) !important;
+    }
+
+    body.page-forum table.forum-topic-message > tbody > tr:first-child > td,
+    body.forum table.forum-topic-message > tbody > tr:first-child > td,
+    body.page-forum .forum-topic-message .message-header,
+    body.forum .forum-topic-message .message-header {
+        height: auto !important;
+        background: #202735 !important;
+        color: #d9e1ec !important;
+        padding: 10px 14px !important;
+        border: 0 !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+    }
+
+    body.page-forum table.forum-topic-message > tbody > tr:first-child > td a,
+    body.forum table.forum-topic-message > tbody > tr:first-child > td a,
+    body.page-forum .forum-topic-message .message-header a,
+    body.forum .forum-topic-message .message-header a {
+        color: #b9c9ee !important;
+        font-weight: 800 !important;
+    }
+
+    body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child,
+    body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child,
+    body.page-forum .forum-topic-message-user,
+    body.forum .forum-topic-message-user {
+        width: 170px !important;
+        min-width: 170px !important;
+        background: #111827 !important;
+        color: #9aa7b8 !important;
+        padding: 14px !important;
+        vertical-align: top !important;
+        border-right: 1px solid #263244 !important;
+    }
+
+    body.page-forum .forum-topic-message-user a,
+    body.forum .forum-topic-message-user a,
+    body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child a,
+    body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child a {
+        color: #7ea2ff !important;
+        font-weight: 800 !important;
+    }
+
+    body.page-forum .forum-topic-message-user img,
+    body.forum .forum-topic-message-user img,
+    body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child img,
+    body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child img {
+        width: 96px !important;
+        height: 96px !important;
+        object-fit: cover !important;
+        border: 1px solid #324055 !important;
+        border-radius: var(--m-r-sm) !important;
+        margin: 8px 0 10px !important;
+    }
+
+    body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:last-child,
+    body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:last-child,
+    body.page-forum .forum-topic-message .message,
+    body.forum .forum-topic-message .message {
+        background: var(--m-bg1) !important;
+        color: var(--m-text) !important;
+        padding: 14px 18px 22px !important;
+        vertical-align: top !important;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+    }
+
+    body.page-forum .forum-topic-message .message img,
+    body.forum .forum-topic-message .message img,
+    body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:last-child img,
+    body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:last-child img {
+        max-width: 100% !important;
+        height: auto !important;
+        border-radius: var(--m-r-sm) !important;
+    }
+
+    body.page-forum .forum-topic-message .message > img,
+    body.forum .forum-topic-message .message > img,
+    body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:last-child > img {
+        display: block !important;
+        margin-top: 8px !important;
+    }
+
+    body.page-forum .forum-topic-message .message blockquote,
+    body.forum .forum-topic-message .message blockquote,
+    body.page-forum .quotetext,
+    body.forum .quotetext {
+        background: var(--m-bg2) !important;
+        border: 1px solid var(--m-border2) !important;
+        border-left: 3px solid var(--m-accent) !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-text2) !important;
+        margin: 12px 0 !important;
+        padding: 12px 14px !important;
+    }
+
+    body.page-forum .forum-topic-message .sig,
+    body.forum .forum-topic-message .sig,
+    body.page-forum .forum-topic-message .signature,
+    body.forum .forum-topic-message .signature {
+        border-top: 1px solid var(--m-border2) !important;
+        color: var(--m-text3) !important;
+        margin-top: 18px !important;
+        padding-top: 12px !important;
+        font-size: 12px !important;
+    }
+
+    body.page-forum input[type="button"],
+    body.page-forum input[type="submit"],
+    body.page-forum button,
+    body.page-forum .btn-form-submit,
+    body.page-forum .inputButton,
+    body.forum input[type="button"],
+    body.forum input[type="submit"],
+    body.forum button,
+    body.forum .btn-form-submit,
+    body.forum .inputButton {
+        min-height: 32px !important;
+        border: 0 !important;
+        border-radius: var(--m-r-sm) !important;
+        background: var(--m-accent) !important;
+        color: #fff !important;
+        font-family: var(--m-font) !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        padding: 0 14px !important;
+    }
+
+    body.page-forum textarea,
+    body.page-forum input[type="text"],
+    body.page-forum select,
+    body.forum textarea,
+    body.forum input[type="text"],
+    body.forum select {
+        background: var(--m-bg1) !important;
+        border: 1px solid var(--m-border) !important;
+        border-radius: var(--m-r-sm) !important;
+        color: var(--m-text) !important;
+        font-family: var(--m-font) !important;
     }
 
     /* ═══ LIST / EPISODE / PROFILE ═══ */
@@ -2526,6 +2776,13 @@
     }
 
     @media (max-width: 900px) {
+        body.page-forum #contentWrapper,
+        body.forum #contentWrapper {
+            width: auto !important;
+            max-width: none !important;
+            padding: 0 16px 36px !important;
+        }
+
         body.index.mal-mod-home #myanimelist,
         body.index.mal-mod-home #contentWrapper,
         body.index.mal-mod-home #content,
@@ -2562,6 +2819,42 @@
     }
 
     @media (max-width: 640px) {
+        body.page-forum table.forum-topic-message,
+        body.page-forum table.forum-topic-message > tbody,
+        body.page-forum table.forum-topic-message > tbody > tr,
+        body.page-forum table.forum-topic-message > tbody > tr > td,
+        body.forum table.forum-topic-message,
+        body.forum table.forum-topic-message > tbody,
+        body.forum table.forum-topic-message > tbody > tr,
+        body.forum table.forum-topic-message > tbody > tr > td {
+            display: block !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child,
+        body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child,
+        body.page-forum .forum-topic-message-user,
+        body.forum .forum-topic-message-user {
+            border-right: 0 !important;
+            border-bottom: 1px solid #263244 !important;
+        }
+
+        body.page-forum .forum-topic-message-user img,
+        body.forum .forum-topic-message-user img,
+        body.page-forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child img,
+        body.forum table.forum-topic-message > tbody > tr:nth-child(2) > td:first-child img {
+            width: 72px !important;
+            height: 72px !important;
+        }
+
+        body.page-forum #content > h1,
+        body.page-forum #content > h2,
+        body.forum #content > h1,
+        body.forum #content > h2 {
+            font-size: 20px !important;
+        }
+
         body.index.mal-mod-home #myanimelist {
             overflow-x: hidden !important;
         }
