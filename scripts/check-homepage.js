@@ -174,10 +174,16 @@ async function dismissPrivacy(page) {
     };
     const h1Style = getComputedStyle(document.querySelector('h1.forum_locheader'));
     const contentStyle = getComputedStyle(document.querySelector('div.forum-topic-message.message .content'));
+    const logoStyle = getComputedStyle(document.querySelector('#headerSmall .link-mal-logo'), '::after');
 
     return {
       hasTimelinePost: Boolean(document.querySelector('div.forum-topic-message.message')),
       shellWidth: box('#myanimelist')?.width || 0,
+      wrapperWidth: box('#myanimelist > .wrapper')?.width || 0,
+      menuWidth: box('#menu')?.width || 0,
+      headerHeight: box('#headerSmall')?.height || 0,
+      headerBannerDisplay: rgb('#headerSmall .header-mini-banner', 'display'),
+      logoContent: logoStyle.content,
       postWidth: box('div.forum-topic-message.message')?.width || 0,
       h1BorderWidth: h1Style.borderTopWidth,
       toolbarBackground: rgb('.forum.timeline .mal-navbar'),
@@ -189,6 +195,11 @@ async function dismissPrivacy(page) {
 
   if (!forumSummary.hasTimelinePost) throw new Error('Forum timeline post was not visible.');
   if (forumSummary.shellWidth < 1300) throw new Error('Forum canvas is still trapped in the old narrow shell.');
+  if (forumSummary.wrapperWidth < 1300) throw new Error('Forum wrapper is still trapped in the old narrow shell.');
+  if (forumSummary.menuWidth < 1300) throw new Error('Forum top navigation is still trapped in the old narrow shell.');
+  if (forumSummary.headerHeight < 40) throw new Error('Forum logo header is clipping its content.');
+  if (forumSummary.headerBannerDisplay !== 'none') throw new Error('Forum header ad banner should be hidden.');
+  if (forumSummary.logoContent !== '"MyAnimeList"') throw new Error('Forum header logo text was not rendered.');
   if (forumSummary.postWidth < 1300) throw new Error('Forum post card is still too narrow.');
   if (forumSummary.h1BorderWidth !== '0px') throw new Error('Forum thread title still has a chip/border treatment.');
   if (forumSummary.toolbarBackground !== 'rgb(255, 255, 255)') throw new Error('Forum toolbar should use a light MAL-like surface.');
